@@ -1,0 +1,1179 @@
+/* ===================================
+   MOBILE-FIRST RESPONSIVE DESIGN
+   Product Catalog Template
+   =================================== */
+
+/* ===================================
+   BASE STYLES (MOBILE - 320px+)
+   Default styles are for mobile devices
+   =================================== */
+
+/* Body - Mobile Base */
+body {
+    padding: 20px 15px;
+    font-size: 14px;
+}
+
+/* ===================================
+   CATALOG CONTAINER - MOBILE
+   =================================== */
+
+.catalog-container {
+    perspective: none; /* Remove 3D on mobile */
+    padding: 10px;
+    gap: 30px;
+}
+
+/* ===================================
+   SPREADS - 2D FLAT VIEW ON MOBILE
+   =================================== */
+
+.spread {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 500px;
+    transform: none !important; /* Flat 2D view */
+    flex-direction: column;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.spread:hover {
+    transform: none !important; /* No 3D hover effect on mobile */
+    box-shadow: 0 8px 20px var(--shadow-medium);
+}
+
+.page {
+    width: 100%;
+    min-height: 250px;
+}
+
+.left-page {
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.page-content {
+    padding: 20px 15px;
+}
+
+/* ===================================
+   NAVIGATION - MOBILE OPTIMIZED
+   =================================== */
+
+.nav-controls {
+    bottom: 15px;
+    padding: 10px 20px;
+    gap: 12px;
+    border-radius: 30px;
+    width: calc(100% - 30px);
+    max-width: 320px;
+}
+
+.nav-btn {
+    width: 44px; /* Touch-friendly 44px minimum */
+    height: 44px;
+}
+
+.nav-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.spread-indicator {
+    font-size: 12pt;
+    min-width: 50px;
+}
+
+/* ===================================
+   DARK MODE TOGGLE - MOBILE
+   =================================== */
+
+.dark-mode-toggle {
+    top: 15px;
+    right: 15px;
+    width: 44px; /* Touch-friendly */
+    height: 44px;
+}
+
+.dark-mode-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===================================
+   TOP TOOLBAR - MOBILE STACKED
+   =================================== */
+
+.top-toolbar {
+    top: 70px; /* Below dark mode toggle */
+    flex-direction: column;
+    padding: 12px 15px;
+    gap: 12px;
+    align-items: stretch;
+}
+
+.toolbar-left,
+.toolbar-right {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Search - Full Width on Mobile */
+.search-container {
+    width: 100%;
+    order: -1; /* Search first */
+}
+
+#catalogSearch {
+    padding: 12px 40px 12px 40px;
+    font-size: 15px; /* Prevent iOS zoom */
+}
+
+.search-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* Currency Selector - Mobile */
+.currency-selector {
+    padding: 10px 15px;
+    font-size: 15px; /* Prevent iOS zoom */
+    flex: 1;
+}
+
+/* Toolbar Buttons - Mobile */
+.toolbar-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+}
+
+/* ===================================
+   FLOATING ACTION BUTTONS - MOBILE
+   =================================== */
+
+.floating-actions {
+    right: 15px;
+    bottom: 80px; /* Above nav controls */
+    gap: 12px;
+}
+
+.fab {
+    width: 52px;
+    height: 52px;
+    box-shadow: 0 4px 12px rgba(0, 167, 157, 0.5);
+}
+
+.fab svg {
+    width: 22px;
+    height: 22px;
+}
+
+.fab-scroll-top {
+    display: none;
+}
+
+.fab-scroll-top.visible {
+    display: flex;
+}
+
+/* ===================================
+   SIDE PANELS - FULL WIDTH ON MOBILE
+   =================================== */
+
+.side-panel {
+    width: 100%;
+    right: -100%;
+}
+
+.side-panel.active {
+    right: 0;
+}
+
+.panel-header {
+    padding: 15px;
+}
+
+.panel-content {
+    padding: 15px;
+}
+
+.panel-close {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+}
+
+/* ===================================
+   FILTER SIDEBAR - MOBILE SLIDE-OUT
+   =================================== */
+
+.filter-sidebar {
+    left: -100%;
+    top: 0;
+    width: 100%;
+    max-width: 320px;
+    height: 100vh;
+    border-radius: 0;
+    padding-top: 60px;
+}
+
+.filter-sidebar.active {
+    left: 0;
+}
+
+.filter-toggle {
+    right: -50px;
+    top: 200px;
+    width: 50px;
+    height: 50px;
+}
+
+.filter-content {
+    padding: 15px;
+}
+
+/* ===================================
+   TOC SIDEBAR - MOBILE BOTTOM SHEET
+   =================================== */
+
+.toc-sidebar {
+    right: -100%;
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    max-width: none;
+    height: 50vh;
+    border-radius: 20px 20px 0 0;
+}
+
+.toc-sidebar.active {
+    right: 0;
+    animation: slideUpFromBottom 0.3s ease;
+}
+
+.toc-toggle {
+    left: auto;
+    right: 15px;
+    top: auto;
+    bottom: 80px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+@keyframes slideUpFromBottom {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* ===================================
+   BREADCRUMB - MOBILE COMPACT
+   =================================== */
+
+.breadcrumb-nav {
+    top: 180px;
+    left: 15px;
+    right: 15px;
+    padding: 6px 12px;
+    font-size: 11px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.breadcrumb-item {
+    font-size: 11px;
+}
+
+/* ===================================
+   COMPARISON BAR - MOBILE
+   =================================== */
+
+.comparison-bar {
+    padding: 12px 15px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.comparison-bar-content {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+/* ===================================
+   MODALS - FULL SCREEN ON MOBILE
+   =================================== */
+
+.modal-content {
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    overflow-y: auto;
+}
+
+.modal-body {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 60px 20px 20px;
+}
+
+.modal-image {
+    height: 250px;
+}
+
+.modal-close {
+    top: 15px;
+    right: 15px;
+    width: 44px;
+    height: 44px;
+}
+
+.modal-info h3 {
+    font-size: 20pt;
+}
+
+.modal-price {
+    font-size: 24pt;
+}
+
+/* Comparison Modal */
+.large-modal {
+    width: 100%;
+    max-width: 100%;
+}
+
+.comparison-table {
+    font-size: 12px;
+    display: block;
+    overflow-x: auto;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 10px;
+    min-width: 120px;
+}
+
+/* ===================================
+   TYPOGRAPHY - MOBILE OPTIMIZED
+   =================================== */
+
+.catalog-title {
+    font-size: 32pt;
+    line-height: 1.2;
+}
+
+.section-header {
+    font-size: 20pt;
+    margin-bottom: 20px;
+}
+
+.product-title {
+    font-size: 12pt;
+}
+
+p {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.page-header {
+    font-size: 11px;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0 0 10px 0;
+}
+
+/* ===================================
+   PRODUCT GRIDS - MOBILE SINGLE COLUMN
+   =================================== */
+
+.product-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.product-cell {
+    padding: 15px;
+    background: var(--background-neutral);
+    border-radius: 12px;
+}
+
+.product-image-placeholder {
+    width: 100%;
+    max-width: 200px;
+    height: 200px;
+    margin: 0 auto 15px;
+}
+
+.product-info {
+    width: 100%;
+}
+
+.product-sku {
+    font-size: 10pt;
+}
+
+.product-desc {
+    font-size: 10pt;
+    max-height: none;
+}
+
+.product-price {
+    font-size: 12pt;
+}
+
+/* ===================================
+   DETAILED PRODUCTS - MOBILE
+   =================================== */
+
+.detailed-products,
+.detailed-products.two-column,
+.detailed-products.three-column {
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.detailed-image-placeholder,
+.detailed-product.compact .detailed-image-placeholder {
+    height: 180px;
+}
+
+/* ===================================
+   COVER PAGE - MOBILE
+   =================================== */
+
+.cover-top {
+    min-height: 200px;
+}
+
+.logo {
+    font-size: 32pt;
+}
+
+.logo-tagline {
+    font-size: 10pt;
+}
+
+.cover-bottom {
+    padding: 30px 20px;
+}
+
+.curved-transition {
+    top: -30px;
+    height: 60px;
+}
+
+.large-placeholder {
+    width: 150px;
+    height: 150px;
+}
+
+.placeholder-icon {
+    width: 60px;
+    height: 60px;
+}
+
+/* ===================================
+   TOC - MOBILE
+   =================================== */
+
+.toc-buttons {
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.toc-button {
+    height: 48px;
+    font-size: 12pt;
+    padding: 0 20px;
+}
+
+.stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.stat-number {
+    font-size: 24pt;
+}
+
+.stat-label {
+    font-size: 10pt;
+}
+
+.company-highlights {
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.three-column-text {
+    column-count: 1;
+}
+
+/* ===================================
+   CONTACT - MOBILE
+   =================================== */
+
+.contact-section {
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.contact-block {
+    padding: 20px;
+}
+
+.contact-block.full-width {
+    grid-column: 1;
+}
+
+.newsletter-section {
+    padding: 20px;
+}
+
+.newsletter-form {
+    flex-direction: column;
+}
+
+.newsletter-form input,
+.newsletter-form button {
+    width: 100%;
+}
+
+/* ===================================
+   BACK COVER - MOBILE
+   =================================== */
+
+.back-teal-section {
+    padding: 30px 20px;
+}
+
+.back-title {
+    font-size: 32pt;
+}
+
+.back-subtitle {
+    font-size: 13pt;
+}
+
+.back-logo {
+    font-size: 24pt;
+}
+
+.back-white-section {
+    padding: 30px 20px;
+}
+
+/* ===================================
+   KEYBOARD SHORTCUTS - MOBILE
+   =================================== */
+
+.shortcuts-list {
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.shortcut-item {
+    padding: 12px;
+    gap: 12px;
+}
+
+kbd {
+    font-size: 11px;
+    padding: 6px 10px;
+    min-width: 32px;
+}
+
+/* ===================================
+   BULK CALCULATOR - MOBILE
+   =================================== */
+
+.bulk-row {
+    font-size: 14px;
+}
+
+.total-row {
+    font-size: 16px;
+}
+
+.bulk-savings {
+    font-size: 14px;
+}
+
+/* ===================================
+   SHARE OPTIONS - MOBILE
+   =================================== */
+
+.share-options {
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.share-btn {
+    padding: 15px;
+}
+
+/* ===================================
+   NOTIFICATIONS - MOBILE
+   =================================== */
+
+.notification {
+    top: 80px;
+    right: 15px;
+    left: 15px;
+    max-width: none;
+    padding: 12px 15px;
+}
+
+/* ===================================
+   TOUR TOOLTIP - MOBILE
+   =================================== */
+
+.tour-tooltip {
+    max-width: calc(100% - 30px);
+    left: 15px;
+    right: 15px;
+}
+
+/* ===================================
+   ANALYTICS - MOBILE
+   =================================== */
+
+.analytics-badge {
+    bottom: 15px;
+    left: 15px;
+    padding: 8px 12px;
+    font-size: 11px;
+}
+
+.performance-monitor {
+    top: auto;
+    bottom: 80px;
+    right: 15px;
+    font-size: 10px;
+    padding: 8px 12px;
+}
+
+/* ===================================
+   SCROLL PROGRESS - MOBILE
+   =================================== */
+
+.scroll-progress-container {
+    height: 3px;
+}
+
+/* ===================================
+   LOADING SCREEN - MOBILE
+   =================================== */
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+}
+
+.loading-screen p {
+    font-size: 12pt;
+}
+
+/* ===================================
+   TOUCH OPTIMIZATIONS
+   =================================== */
+
+/* Larger tap targets - 44px minimum */
+button,
+.btn-primary,
+.btn-secondary,
+.toc-button,
+.toolbar-btn,
+.fab,
+.nav-btn,
+.dark-mode-toggle {
+    min-width: 44px;
+    min-height: 44px;
+}
+
+/* Remove hover effects on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .product-cell:hover,
+    .detailed-product:hover,
+    .spread:hover {
+        transform: none;
+    }
+
+    .product-hover-overlay {
+        display: none;
+    }
+}
+
+/* ===================================
+   TABLET - 768px+
+   Progressive enhancement for tablets
+   =================================== */
+
+@media (min-width: 768px) {
+    body {
+        padding: 30px 25px;
+    }
+
+    .catalog-container {
+        padding: 20px;
+        gap: 40px;
+    }
+
+    .spread {
+        min-height: 600px;
+        border-radius: 16px;
+    }
+
+    .page-content {
+        padding: 25px;
+    }
+
+    /* Top Toolbar - Side by side on tablet */
+    .top-toolbar {
+        flex-direction: row;
+        padding: 15px 30px;
+    }
+
+    .toolbar-left,
+    .toolbar-right {
+        width: auto;
+    }
+
+    .search-container {
+        width: 350px;
+    }
+
+    /* Product Grid - 2 columns on tablet */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px 20px;
+    }
+
+    .detailed-products.two-column,
+    .detailed-products.three-column {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Side Panels - Not full width */
+    .side-panel {
+        width: 400px;
+        right: -400px;
+    }
+
+    .filter-sidebar {
+        width: 300px;
+        left: -300px;
+        top: 140px;
+        height: auto;
+    }
+
+    .toc-sidebar {
+        width: 280px;
+        right: -280px;
+        top: 140px;
+        height: auto;
+        border-radius: 12px 0 0 12px;
+    }
+
+    /* Modal - Not full screen */
+    .modal-content {
+        max-width: 700px;
+        width: 90%;
+        height: auto;
+        max-height: 90vh;
+        border-radius: 20px;
+    }
+
+    /* Typography */
+    .catalog-title {
+        font-size: 42pt;
+    }
+
+    .section-header {
+        font-size: 24pt;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Contact */
+    .contact-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Shortcuts */
+    .shortcuts-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Share Options */
+    .share-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Three Column Text */
+    .three-column-text {
+        column-count: 2;
+    }
+
+    /* Company Highlights */
+    .company-highlights {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Newsletter Form */
+    .newsletter-form {
+        flex-direction: row;
+    }
+
+    .newsletter-form input {
+        flex: 1;
+    }
+
+    .newsletter-form button {
+        width: auto;
+    }
+}
+
+/* ===================================
+   DESKTOP - 1024px+
+   Full desktop experience
+   =================================== */
+
+@media (min-width: 1024px) {
+    body {
+        padding: 40px;
+    }
+
+    .catalog-container {
+        padding: 30px;
+        gap: 50px;
+        perspective: 1500px; /* Enable 3D for desktop */
+    }
+
+    /* Enable 3D Isometric View on Desktop */
+    .spread {
+        width: 1000px !important;
+        height: 625px !important;
+        transform: rotateX(8deg) rotateY(-4deg) !important;
+        flex-direction: row;
+    }
+
+    .spread:hover {
+        transform: rotateX(5deg) rotateY(-2deg) scale(1.02) !important;
+    }
+
+    .left-page {
+        border-right: 1px solid #e0e0e0;
+        border-bottom: none;
+    }
+
+    .page-content {
+        padding: 30px;
+    }
+
+    /* Navigation */
+    .nav-controls {
+        bottom: 40px;
+        padding: 15px 30px;
+        gap: 20px;
+        width: auto;
+        max-width: none;
+    }
+
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .spread-indicator {
+        font-size: 14pt;
+        min-width: 60px;
+    }
+
+    /* Dark Mode Toggle */
+    .dark-mode-toggle {
+        top: 40px;
+        right: 40px;
+        width: 50px;
+        height: 50px;
+    }
+
+    /* Top Toolbar */
+    .top-toolbar {
+        top: 60px;
+        padding: 15px 40px;
+    }
+
+    .search-container {
+        width: 400px;
+    }
+
+    /* Floating Actions */
+    .floating-actions {
+        right: 40px;
+        bottom: 120px;
+    }
+
+    .fab {
+        width: 56px;
+        height: 56px;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb-nav {
+        top: 130px;
+        left: 40px;
+        right: auto;
+    }
+
+    /* Product Grid - 3 columns */
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px 20px;
+    }
+
+    .detailed-products.three-column {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Typography */
+    .catalog-title {
+        font-size: 48pt;
+    }
+
+    .section-header {
+        font-size: 28pt;
+    }
+
+    .product-title {
+        font-size: 14pt;
+    }
+
+    /* Page Header */
+    .page-header {
+        position: absolute;
+        top: 30px;
+        padding: 0;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Modal */
+    .modal-content {
+        max-width: 900px;
+    }
+
+    .modal-body {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        padding: 60px 40px 40px;
+    }
+
+    .modal-image {
+        height: 400px;
+    }
+
+    .modal-info h3 {
+        font-size: 24pt;
+    }
+
+    .modal-price {
+        font-size: 32pt;
+    }
+
+    /* Three Column Text */
+    .three-column-text {
+        column-count: 3;
+    }
+
+    /* Cover Page */
+    .logo {
+        font-size: 48pt;
+    }
+
+    .large-placeholder {
+        width: 200px;
+        height: 200px;
+    }
+
+    /* Back Cover */
+    .back-title {
+        font-size: 48pt;
+    }
+
+    .back-subtitle {
+        font-size: 16pt;
+    }
+
+    .back-logo {
+        font-size: 36pt;
+    }
+
+    /* Analytics */
+    .analytics-badge {
+        bottom: 40px;
+        left: 40px;
+    }
+
+    /* Share Options */
+    .share-options {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ===================================
+   LARGE DESKTOP - 1440px+
+   Maximum quality for large screens
+   =================================== */
+
+@media (min-width: 1440px) {
+    body {
+        padding: 60px 40px;
+    }
+
+    .catalog-container {
+        perspective: 2000px;
+    }
+
+    .spread {
+        width: 1400px !important;
+        height: 900px !important;
+        transform: rotateX(10deg) rotateY(-5deg) !important;
+    }
+
+    .spread:hover {
+        transform: rotateX(5deg) rotateY(-2deg) scale(1.02) !important;
+    }
+
+    .catalog-title {
+        font-size: 56pt;
+    }
+
+    .section-header {
+        font-size: 32pt;
+    }
+}
+
+/* ===================================
+   LANDSCAPE MOBILE - Special handling
+   =================================== */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .top-toolbar {
+        padding: 8px 15px;
+    }
+
+    .nav-controls {
+        bottom: 10px;
+        padding: 8px 15px;
+    }
+
+    .floating-actions {
+        bottom: 60px;
+        gap: 8px;
+    }
+
+    .fab {
+        width: 44px;
+        height: 44px;
+    }
+
+    .modal-content {
+        height: 100vh;
+        overflow-y: auto;
+    }
+}
+
+/* ===================================
+   PRINT - Maintain print quality
+   =================================== */
+
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .catalog-container {
+        perspective: none;
+        padding: 0;
+        gap: 0;
+    }
+
+    .spread {
+        box-shadow: none;
+        transform: none !important;
+        page-break-after: always;
+        width: 100%;
+        height: auto;
+        min-height: 297mm;
+    }
+
+    .nav-controls,
+    .dark-mode-toggle,
+    .top-toolbar,
+    .floating-actions,
+    .filter-sidebar,
+    .toc-sidebar,
+    .breadcrumb-nav,
+    .comparison-bar,
+    .analytics-badge,
+    .performance-monitor {
+        display: none !important;
+    }
+}
+
+/* ===================================
+   ACCESSIBILITY - Enhanced
+   =================================== */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .spread {
+        border: 2px solid currentColor;
+    }
+
+    button,
+    .btn-primary,
+    .btn-secondary {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .spread {
+        animation: none;
+    }
+}
+
+/* ===================================
+   END MOBILE-FIRST RESPONSIVE DESIGN
+   =================================== */
