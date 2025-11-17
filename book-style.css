@@ -1,0 +1,409 @@
+/* ===================================
+   REALISTIC BOOK CATALOG DESIGN
+   Desktop Book View - Flat, Centered, Professional
+   =================================== */
+
+/* Only apply book style on desktop */
+@media (min-width: 1024px) {
+
+    /* ===================================
+       CATALOG CONTAINER - BOOK LAYOUT
+       =================================== */
+
+    .catalog-container {
+        perspective: none; /* Remove 3D perspective */
+        padding: 60px 40px;
+        gap: 80px;
+        background: #f5f5f5; /* Subtle background */
+    }
+
+    /* ===================================
+       SPREAD - REALISTIC OPEN BOOK
+       =================================== */
+
+    .spread {
+        width: 1400px !important;
+        height: 900px !important;
+        transform: none !important; /* Remove asymmetric 3D */
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        border-radius: 0; /* Books have sharp corners */
+        box-shadow:
+            0 0 0 1px rgba(0, 0, 0, 0.1),
+            0 20px 60px rgba(0, 0, 0, 0.25),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        background: white;
+    }
+
+    .spread:hover {
+        transform: none !important; /* No transform on hover */
+        box-shadow:
+            0 0 0 1px rgba(0, 0, 0, 0.1),
+            0 25px 80px rgba(0, 0, 0, 0.3),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    }
+
+    /* ===================================
+       BOOK SPINE / BINDING (Center)
+       =================================== */
+
+    .spread::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 8px;
+        height: 100%;
+        background: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.05) 20%,
+            rgba(255, 255, 255, 0.1) 40%,
+            rgba(0, 0, 0, 0.05) 60%,
+            rgba(0, 0, 0, 0.15)
+        );
+        z-index: 100;
+        pointer-events: none;
+        box-shadow:
+            0 0 10px rgba(0, 0, 0, 0.1),
+            inset 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ===================================
+       LEFT & RIGHT PAGES
+       =================================== */
+
+    .page {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+        background: white;
+    }
+
+    .left-page {
+        border-right: 4px solid rgba(0, 0, 0, 0.05); /* Visible gutter */
+        box-shadow: inset -15px 0 20px -10px rgba(0, 0, 0, 0.1); /* Inner shadow */
+    }
+
+    .right-page {
+        box-shadow: inset 15px 0 20px -10px rgba(0, 0, 0, 0.1); /* Inner shadow */
+    }
+
+    /* ===================================
+       PAGE CURL EFFECT (Corners)
+       =================================== */
+
+    .left-page::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 0 40px 40px;
+        border-color: transparent transparent #f5f5f5 transparent;
+        opacity: 0.5;
+        transition: all 0.3s ease;
+    }
+
+    .right-page::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 40px 40px 0;
+        border-color: transparent transparent #f5f5f5 transparent;
+        opacity: 0.5;
+        transition: all 0.3s ease;
+    }
+
+    .spread:hover .left-page::after,
+    .spread:hover .right-page::after {
+        opacity: 0.8;
+        border-width: 0 0 60px 60px; /* Bigger curl on hover */
+    }
+
+    .spread:hover .right-page::after {
+        border-width: 0 60px 60px 0;
+    }
+
+    /* ===================================
+       BOOK EDGES (Top & Bottom)
+       =================================== */
+
+    .spread::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.05) 0%,
+            transparent 2%,
+            transparent 98%,
+            rgba(0, 0, 0, 0.05) 100%
+        );
+        pointer-events: none;
+        z-index: 99;
+    }
+
+    /* ===================================
+       PAGE CONTENT PADDING
+       =================================== */
+
+    .page-content {
+        padding: 40px 50px;
+        height: 100%;
+    }
+
+    /* ===================================
+       REALISTIC BOOK SHADOW
+       =================================== */
+
+    /* Add thickness illusion with stacked shadows */
+    .spread {
+        box-shadow:
+            /* Main shadow */
+            0 25px 80px rgba(0, 0, 0, 0.3),
+            /* Page stack illusion */
+            0 -1px 0 0 rgba(0, 0, 0, 0.1),
+            0 -2px 0 0 rgba(255, 255, 255, 0.9),
+            0 -3px 0 0 rgba(0, 0, 0, 0.1),
+            0 -4px 0 0 rgba(255, 255, 255, 0.9),
+            /* Inner frame */
+            inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    }
+
+    .spread:hover {
+        box-shadow:
+            /* Enhanced shadow on hover */
+            0 30px 100px rgba(0, 0, 0, 0.35),
+            /* Page stack illusion */
+            0 -1px 0 0 rgba(0, 0, 0, 0.1),
+            0 -2px 0 0 rgba(255, 255, 255, 0.9),
+            0 -3px 0 0 rgba(0, 0, 0, 0.1),
+            0 -4px 0 0 rgba(255, 255, 255, 0.9),
+            0 -5px 0 0 rgba(0, 0, 0, 0.1),
+            /* Inner frame */
+            inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    }
+
+    /* ===================================
+       PAGE FLIP ANIMATION
+       =================================== */
+
+    @keyframes pageFlipIn {
+        from {
+            opacity: 0;
+            transform: rotateY(-15deg);
+            transform-origin: left center;
+        }
+        to {
+            opacity: 1;
+            transform: rotateY(0deg);
+        }
+    }
+
+    @keyframes pageFlipOut {
+        from {
+            opacity: 1;
+            transform: rotateY(0deg);
+        }
+        to {
+            opacity: 0;
+            transform: rotateY(15deg);
+            transform-origin: right center;
+        }
+    }
+
+    /* Apply subtle page reveal animation */
+    .spread {
+        animation: fadeInSpread 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeInSpread {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* ===================================
+       STAGGERED ANIMATION DELAYS
+       =================================== */
+
+    .spread:nth-child(1) { animation-delay: 0s; }
+    .spread:nth-child(2) { animation-delay: 0.1s; }
+    .spread:nth-child(3) { animation-delay: 0.2s; }
+    .spread:nth-child(4) { animation-delay: 0.3s; }
+    .spread:nth-child(5) { animation-delay: 0.4s; }
+    .spread:nth-child(6) { animation-delay: 0.5s; }
+    .spread:nth-child(7) { animation-delay: 0.6s; }
+
+    /* ===================================
+       BOOK COVER (First Spread)
+       =================================== */
+
+    .spread[data-spread="1"] {
+        /* Cover gets special treatment */
+        box-shadow:
+            0 30px 90px rgba(0, 0, 0, 0.4),
+            0 -1px 0 0 rgba(0, 0, 0, 0.15),
+            0 -2px 0 0 rgba(255, 255, 255, 0.9),
+            0 -3px 0 0 rgba(0, 0, 0, 0.15),
+            0 -4px 0 0 rgba(255, 255, 255, 0.9),
+            0 -5px 0 0 rgba(0, 0, 0, 0.15),
+            inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ===================================
+       BACK COVER (Last Spread)
+       =================================== */
+
+    .spread[data-spread="7"] {
+        /* Back cover treatment */
+        box-shadow:
+            0 30px 90px rgba(0, 0, 0, 0.4),
+            0 -1px 0 0 rgba(0, 0, 0, 0.15),
+            0 -2px 0 0 rgba(255, 255, 255, 0.9),
+            0 -3px 0 0 rgba(0, 0, 0, 0.15),
+            0 -4px 0 0 rgba(255, 255, 255, 0.9),
+            0 -5px 0 0 rgba(0, 0, 0, 0.15),
+            inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ===================================
+       PAGE NUMBERS
+       =================================== */
+
+    .page-number {
+        position: absolute;
+        bottom: 30px;
+        font-size: 10pt;
+        font-weight: 600;
+        color: var(--text-secondary);
+        z-index: 10;
+    }
+
+    .page-number.left {
+        left: 50px;
+    }
+
+    .page-number.right {
+        right: 50px;
+    }
+
+    /* ===================================
+       PAPER TEXTURE (Optional Enhancement)
+       =================================== */
+
+    .page {
+        background:
+            linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(0, 0, 0, 0.01) 50%,
+                rgba(255, 255, 255, 0) 100%
+            ),
+            white;
+    }
+
+    /* ===================================
+       SMOOTH SCROLLING BETWEEN SPREADS
+       =================================== */
+
+    .catalog-container {
+        scroll-behavior: smooth;
+    }
+
+}
+
+/* ===================================
+   LARGE DESKTOP (1440px+)
+   Enhanced book quality
+   =================================== */
+
+@media (min-width: 1440px) {
+    .spread {
+        width: 1600px !important;
+        height: 1000px !important;
+    }
+
+    .page-content {
+        padding: 50px 60px;
+    }
+
+    /* Enhanced shadows for larger screens */
+    .spread {
+        box-shadow:
+            0 35px 120px rgba(0, 0, 0, 0.35),
+            0 -1px 0 0 rgba(0, 0, 0, 0.1),
+            0 -2px 0 0 rgba(255, 255, 255, 0.9),
+            0 -3px 0 0 rgba(0, 0, 0, 0.1),
+            0 -4px 0 0 rgba(255, 255, 255, 0.9),
+            0 -5px 0 0 rgba(0, 0, 0, 0.1),
+            0 -6px 0 0 rgba(255, 255, 255, 0.9),
+            inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    }
+}
+
+/* ===================================
+   DARK MODE ADJUSTMENTS
+   =================================== */
+
+body.dark-mode .spread {
+    background: #2a2a2a;
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.6),
+        0 -1px 0 0 rgba(0, 0, 0, 0.3),
+        0 -2px 0 0 rgba(255, 255, 255, 0.05),
+        0 -3px 0 0 rgba(0, 0, 0, 0.3),
+        0 -4px 0 0 rgba(255, 255, 255, 0.05),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .page {
+    background: #2a2a2a;
+}
+
+body.dark-mode .spread::before {
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.4),
+        rgba(255, 255, 255, 0.05) 20%,
+        rgba(255, 255, 255, 0.1) 40%,
+        rgba(255, 255, 255, 0.05) 60%,
+        rgba(0, 0, 0, 0.4)
+    );
+}
+
+/* ===================================
+   PRINT OPTIMIZATION
+   =================================== */
+
+@media print {
+    .spread {
+        box-shadow: none !important;
+        transform: none !important;
+    }
+
+    .spread::before,
+    .spread::after,
+    .left-page::after,
+    .right-page::after {
+        display: none !important;
+    }
+}
