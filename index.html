@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Catalog 2025-2026 | BRAND</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="advanced-styles.css">
     <meta name="description" content="Professional B2B Product Catalog 2025-2026">
 </head>
 <body>
@@ -655,6 +656,187 @@
         </div>
     </div>
 
+    <!-- Include UI Components -->
+    <script>
+        // Load UI components from external file
+        fetch('ui-components.html')
+            .then(response => response.text())
+            .then(html => {
+                const container = document.createElement('div');
+                container.innerHTML = html;
+                document.body.appendChild(container);
+            });
+    </script>
+
     <script src="script.js"></script>
+    <script src="advanced-features.js"></script>
+
+    <!-- Quick inline additions for enhanced features -->
+    <script>
+        // Add favorite buttons to products
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.product-cell').forEach(cell => {
+                const productId = cell.getAttribute('data-product-id');
+                if (productId) {
+                    const favBtn = document.createElement('button');
+                    favBtn.className = 'favorite-btn';
+                    favBtn.setAttribute('data-favorite', productId);
+                    favBtn.innerHTML = '🤍';
+                    favBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        if (window.favoritesSystem) {
+                            window.favoritesSystem.toggleFavorite(productId);
+                        }
+                    };
+                    cell.appendChild(favBtn);
+
+                    // Add comparison button
+                    const compBtn = document.createElement('button');
+                    compBtn.className = 'compare-btn';
+                    compBtn.innerHTML = '⚖️';
+                    compBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        const title = cell.querySelector('.product-desc')?.textContent || productId;
+                        const price = cell.querySelector('.product-price')?.textContent || '';
+                        const rating = cell.querySelector('.product-rating')?.textContent || '';
+                        if (window.comparison) {
+                            window.comparison.addToComparison(productId, {title, price, rating});
+                        }
+                    };
+                    cell.appendChild(compBtn);
+
+                    // Add share button
+                    const shareBtn = document.createElement('button');
+                    shareBtn.className = 'share-btn';
+                    shareBtn.innerHTML = '🔗';
+                    shareBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        const title = cell.querySelector('.product-desc')?.textContent || productId;
+                        if (window.shareProduct) {
+                            window.shareProduct(productId, title);
+                        }
+                    };
+                    cell.appendChild(shareBtn);
+                }
+            });
+        });
+    </script>
+
+    <!-- Additional inline styles for new buttons -->
+    <style>
+        .favorite-btn,
+        .compare-btn,
+        .share-btn {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.95);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .favorite-btn {
+            top: 10px;
+            left: 10px;
+        }
+
+        .compare-btn {
+            top: 10px;
+            left: 48px;
+        }
+
+        .share-btn {
+            top: 10px;
+            left: 86px;
+        }
+
+        .favorite-btn:hover,
+        .compare-btn:hover,
+        .share-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .favorite-btn.active {
+            background: var(--primary-teal);
+        }
+
+        /* Product cell adjustments for buttons */
+        .product-cell {
+            position: relative;
+        }
+
+        /* Enhanced product hover state */
+        .product-cell:hover .favorite-btn,
+        .product-cell:hover .compare-btn,
+        .product-cell:hover .share-btn {
+            opacity: 1;
+        }
+
+        .favorite-btn,
+        .compare-btn,
+        .share-btn {
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .product-cell:hover .favorite-btn {
+            animation: bounceIn 0.3s ease 0.1s forwards;
+        }
+
+        .product-cell:hover .compare-btn {
+            animation: bounceIn 0.3s ease 0.2s forwards;
+        }
+
+        .product-cell:hover .share-btn {
+            animation: bounceIn 0.3s ease 0.3s forwards;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Pricing data attributes for currency conversion */
+        .product-price[data-price] {
+            cursor: help;
+        }
+
+        /* Loading state improvements */
+        #loadingScreen.loaded {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Additional smooth animations */
+        * {
+            scroll-margin-top: 150px;
+        }
+
+        /* Enhanced focus states for accessibility */
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible {
+            outline: 3px solid var(--primary-teal);
+            outline-offset: 2px;
+        }
+    </style>
 </body>
 </html>

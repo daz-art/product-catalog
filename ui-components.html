@@ -1,0 +1,454 @@
+<!-- ===================================
+     ADVANCED UI COMPONENTS
+     To be inserted before closing </body>
+     =================================== -->
+
+<!-- SCROLL PROGRESS BAR -->
+<div class="scroll-progress-container">
+    <div id="scrollProgress" class="scroll-progress"></div>
+</div>
+
+<!-- TOP TOOLBAR -->
+<div class="top-toolbar">
+    <div class="toolbar-left">
+        <!-- Search Bar -->
+        <div class="search-container">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input type="text" id="catalogSearch" placeholder="Search products..." aria-label="Search products">
+            <button class="search-clear" id="clearSearch" aria-label="Clear search">✕</button>
+        </div>
+
+        <!-- Search Results -->
+        <div id="searchResults" class="search-results"></div>
+    </div>
+
+    <div class="toolbar-right">
+        <!-- Currency Selector -->
+        <select id="currencySelector" class="currency-selector" onchange="changeCurrency(this.value)" aria-label="Select currency">
+            <option value="USD">$ USD</option>
+            <option value="EUR">€ EUR</option>
+            <option value="GBP">£ GBP</option>
+            <option value="JPY">¥ JPY</option>
+            <option value="CAD">C$ CAD</option>
+        </select>
+
+        <!-- View Mode Toggle -->
+        <button id="viewModeToggle" class="toolbar-btn" onclick="toggleViewMode()" title="Toggle view mode" aria-label="Toggle view mode">
+            ▦
+        </button>
+
+        <!-- Sound Toggle -->
+        <button id="soundToggle" class="toolbar-btn" onclick="toggleSound()" title="Toggle sound" aria-label="Toggle sound">
+            🔊
+        </button>
+
+        <!-- Fullscreen Toggle -->
+        <button id="fullscreenToggle" class="toolbar-btn" onclick="toggleFullscreen()" title="Toggle fullscreen" aria-label="Toggle fullscreen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+            </svg>
+        </button>
+
+        <!-- Keyboard Shortcuts -->
+        <button class="toolbar-btn" onclick="showKeyboardShortcuts()" title="Keyboard shortcuts (?)" aria-label="Show keyboard shortcuts">
+            ⌨️
+        </button>
+
+        <!-- Help/Tour -->
+        <button class="toolbar-btn" onclick="new OnboardingTour().start()" title="Start tour" aria-label="Start tour">
+            ❓
+        </button>
+    </div>
+</div>
+
+<!-- FLOATING ACTION BUTTONS -->
+<div class="floating-actions">
+    <!-- Favorites Button -->
+    <button id="favoritesBtn" class="fab fab-favorites" onclick="showFavoritesPanel()" title="Favorites" aria-label="Show favorites">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        <span class="favorites-count">0</span>
+    </button>
+
+    <!-- Comparison Button -->
+    <button id="comparisonBtn" class="fab fab-comparison" onclick="comparison.showComparisonTable()" title="Compare products" aria-label="Show comparison">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 5H2v7h7V5zM22 5h-7v7h7V5zM22 12h-7v7h7v-7zM9 12H2v7h7v-7z"/>
+        </svg>
+        <span id="comparisonCount" class="comparison-count">0</span>
+    </button>
+
+    <!-- Scroll to Top -->
+    <button id="scrollTopBtn" class="fab fab-scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to top" aria-label="Scroll to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
+</div>
+
+<!-- COMPARISON BAR -->
+<div id="comparisonBar" class="comparison-bar">
+    <div class="comparison-bar-content">
+        <span>Comparing <strong id="comparisonCount">0</strong> products</span>
+        <button class="btn-primary" onclick="comparison.showComparisonTable()">View Comparison</button>
+        <button class="btn-secondary" onclick="CatalogState.comparison = []; comparison.updateComparisonBar()">Clear All</button>
+    </div>
+</div>
+
+<!-- FAVORITES PANEL -->
+<div id="favoritesPanel" class="side-panel">
+    <div class="panel-header">
+        <h3>My Favorites</h3>
+        <button onclick="hideFavoritesPanel()" class="panel-close" aria-label="Close panel">✕</button>
+    </div>
+    <div class="panel-content" id="favoritesContent">
+        <p class="empty-state">No favorites yet. Click the heart icon on products to add them!</p>
+    </div>
+</div>
+
+<!-- COMPARISON MODAL -->
+<div id="comparisonModal" class="modal">
+    <div class="modal-overlay" onclick="closeModal('comparisonModal')"></div>
+    <div class="modal-content large-modal">
+        <button class="modal-close" onclick="closeModal('comparisonModal')" aria-label="Close modal">✕</button>
+        <h2>Product Comparison</h2>
+        <div id="comparisonTableContainer"></div>
+    </div>
+</div>
+
+<!-- BULK CALCULATOR MODAL -->
+<div id="bulkCalculatorModal" class="modal">
+    <div class="modal-overlay" onclick="closeModal('bulkCalculatorModal')"></div>
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal('bulkCalculatorModal')" aria-label="Close modal">✕</button>
+        <h2>Bulk Order Calculator</h2>
+        <div class="bulk-calculator">
+            <div class="form-group">
+                <label for="bulkQuantity">Quantity:</label>
+                <input type="number" id="bulkQuantity" min="1" value="1" class="form-input">
+            </div>
+            <div class="discount-tiers">
+                <h4>Volume Discounts:</h4>
+                <ul>
+                    <li>10-24 units: <strong>5% off</strong></li>
+                    <li>25-49 units: <strong>10% off</strong></li>
+                    <li>50-99 units: <strong>15% off</strong></li>
+                    <li>100+ units: <strong>20% off</strong></li>
+                </ul>
+            </div>
+            <div id="bulkResult" class="bulk-result"></div>
+            <button id="calculateBulk" class="btn-primary">Calculate</button>
+        </div>
+    </div>
+</div>
+
+<!-- KEYBOARD SHORTCUTS MODAL -->
+<div id="shortcutsModal" class="modal">
+    <div class="modal-overlay" onclick="closeModal('shortcutsModal')"></div>
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal('shortcutsModal')" aria-label="Close modal">✕</button>
+        <h2>Keyboard Shortcuts</h2>
+        <div class="shortcuts-list">
+            <div class="shortcut-item">
+                <kbd>?</kbd>
+                <span>Show this help</span>
+            </div>
+            <div class="shortcut-item">
+                <kbd>/</kbd>
+                <span>Focus search</span>
+            </div>
+            <div class="shortcut-item">
+                <kbd>←</kbd> <kbd>→</kbd>
+                <span>Navigate pages</span>
+            </div>
+            <div class="shortcut-item">
+                <kbd>Home</kbd> <kbd>End</kbd>
+                <span>First/Last page</span>
+            </div>
+            <div class="shortcut-item">
+                <kbd>D</kbd>
+                <span>Toggle dark mode</span>
+            </div>
+            <div class="shortcut-item">
+                <kbd>F</kbd>
+                <span>Toggle fullscreen</span>
+            </div>
+            <div class="shortcut-item">
+                <kbd>S</kbd>
+                <span>Toggle sound</span>
+            </div>
+            <div class="shortcut-item">
+                <kbd>V</kbd>
+                <span>Toggle view mode</span>
+            </div>
+            <div class="shortcut-item">
+                <kbd>H</kbd>
+                <span>Start help tour</span>
+            </div>
+            <div class="shortcut-item">
+                <kbd>Esc</kbd>
+                <span>Close modals</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FILTER SIDEBAR -->
+<div id="filterSidebar" class="filter-sidebar">
+    <button class="filter-toggle" onclick="toggleFilters()" aria-label="Toggle filters">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+        </svg>
+        Filters
+    </button>
+
+    <div class="filter-content">
+        <h3>Filter Products</h3>
+
+        <!-- Price Range -->
+        <div class="filter-group">
+            <label>Price Range</label>
+            <input type="range" id="priceRange" min="0" max="1000" value="1000" class="range-slider">
+            <div class="range-values">
+                <span>$0</span>
+                <span id="priceValue">$1000</span>
+            </div>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="filter-group">
+            <label>Category</label>
+            <select id="categoryFilter" class="filter-select">
+                <option value="all">All Categories</option>
+                <option value="premium">Premium</option>
+                <option value="standard">Standard</option>
+                <option value="budget">Budget</option>
+            </select>
+        </div>
+
+        <!-- Rating Filter -->
+        <div class="filter-group">
+            <label>Minimum Rating</label>
+            <div class="rating-filter">
+                <button class="rating-btn" data-rating="5">★★★★★</button>
+                <button class="rating-btn" data-rating="4">★★★★☆</button>
+                <button class="rating-btn" data-rating="3">★★★☆☆</button>
+                <button class="rating-btn" data-rating="2">★★☆☆☆</button>
+                <button class="rating-btn" data-rating="1">★☆☆☆☆</button>
+            </div>
+        </div>
+
+        <!-- Sort Options -->
+        <div class="filter-group">
+            <label>Sort By</label>
+            <select id="sortFilter" class="filter-select">
+                <option value="default">Default</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="name-az">Name: A-Z</option>
+                <option value="name-za">Name: Z-A</option>
+                <option value="rating">Highest Rated</option>
+            </select>
+        </div>
+
+        <button class="btn-primary btn-block" onclick="applyFilters()">Apply Filters</button>
+        <button class="btn-secondary btn-block" onclick="resetFilters()">Reset All</button>
+    </div>
+</div>
+
+<!-- BREADCRUMB NAVIGATION -->
+<div class="breadcrumb-nav">
+    <a href="#" class="breadcrumb-item">Home</a>
+    <span class="breadcrumb-separator">/</span>
+    <a href="#" class="breadcrumb-item">Catalog</a>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-item active" id="currentSection">Cover</span>
+</div>
+
+<!-- TABLE OF CONTENTS SIDEBAR -->
+<div id="tocSidebar" class="toc-sidebar">
+    <button class="toc-toggle" onclick="toggleTOC()" aria-label="Toggle table of contents">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"/>
+            <line x1="8" y1="12" x2="21" y2="12"/>
+            <line x1="8" y1="18" x2="21" y2="18"/>
+            <line x1="3" y1="6" x2="3.01" y2="6"/>
+            <line x1="3" y1="12" x2="3.01" y2="12"/>
+            <line x1="3" y1="18" x2="3.01" y2="18"/>
+        </svg>
+    </button>
+
+    <div class="toc-content">
+        <h3>Table of Contents</h3>
+        <ul class="toc-list">
+            <li><a href="#" onclick="navigateToSpread(1)" data-spread="1">Cover</a></li>
+            <li><a href="#" onclick="navigateToSpread(2)" data-spread="2">Company Info</a></li>
+            <li><a href="#" onclick="navigateToSpread(3)" data-spread="3">Product Categories</a></li>
+            <li><a href="#" onclick="navigateToSpread(4)" data-spread="4">Featured Products</a></li>
+            <li><a href="#" onclick="navigateToSpread(5)" data-spread="5">Product Details</a></li>
+            <li><a href="#" onclick="navigateToSpread(6)" data-spread="6">More Products</a></li>
+            <li><a href="#" onclick="navigateToSpread(7)" data-spread="7">Contact</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- QUICK VIEW MODAL -->
+<div id="quickViewModal" class="modal">
+    <div class="modal-overlay" onclick="closeModal('quickViewModal')"></div>
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal('quickViewModal')" aria-label="Close modal">✕</button>
+        <div class="quick-view-content">
+            <div class="quick-view-image">
+                <img id="quickViewImage" src="" alt="Product">
+            </div>
+            <div class="quick-view-info">
+                <h2 id="quickViewTitle"></h2>
+                <div class="quick-view-price" id="quickViewPrice"></div>
+                <div class="quick-view-rating" id="quickViewRating"></div>
+                <p id="quickViewDescription"></p>
+                <div class="quick-view-actions">
+                    <button class="btn-primary" onclick="viewFullDetails()">Full Details</button>
+                    <button class="btn-secondary" onclick="bulkCalculator.showCalculator()">Bulk Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NOTIFICATION CONTAINER -->
+<div id="notificationContainer" class="notification-container"></div>
+
+<!-- CONFETTI CANVAS (for celebrations) -->
+<canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+<!-- ANALYTICS BADGE -->
+<div class="analytics-badge" onclick="toggleAnalytics()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="12" y1="20" x2="12" y2="10"/>
+        <line x1="18" y1="20" x2="18" y2="4"/>
+        <line x1="6" y1="20" x2="6" y2="16"/>
+    </svg>
+    <span class="analytics-label">Stats</span>
+</div>
+
+<!-- PERFORMANCE MONITOR -->
+<div id="performanceMonitor" class="performance-monitor">
+    <div class="perf-item">
+        <span class="perf-label">FPS:</span>
+        <span id="fpsCounter" class="perf-value">60</span>
+    </div>
+    <div class="perf-item">
+        <span class="perf-label">Load:</span>
+        <span id="loadTime" class="perf-value">0ms</span>
+    </div>
+</div>
+
+<!-- SHARE MODAL -->
+<div id="shareModal" class="modal">
+    <div class="modal-overlay" onclick="closeModal('shareModal')"></div>
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal('shareModal')" aria-label="Close modal">✕</button>
+        <h2>Share Product</h2>
+        <div class="share-options">
+            <button class="share-btn" onclick="shareVia('facebook')">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                Facebook
+            </button>
+            <button class="share-btn" onclick="shareVia('twitter')">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                </svg>
+                Twitter
+            </button>
+            <button class="share-btn" onclick="shareVia('linkedin')">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+                LinkedIn
+            </button>
+            <button class="share-btn" onclick="shareVia('email')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                </svg>
+                Email
+            </button>
+            <button class="share-btn" onclick="copyShareLink()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+                Copy Link
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Helper functions for UI components
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('active');
+    }
+}
+
+function showFavoritesPanel() {
+    const panel = document.getElementById('favoritesPanel');
+    if (panel) {
+        panel.classList.add('active');
+    }
+}
+
+function hideFavoritesPanel() {
+    const panel = document.getElementById('favoritesPanel');
+    if (panel) {
+        panel.classList.remove('active');
+    }
+}
+
+function toggleFilters() {
+    const sidebar = document.getElementById('filterSidebar');
+    if (sidebar) {
+        sidebar.classList.toggle('active');
+    }
+}
+
+function toggleTOC() {
+    const sidebar = document.getElementById('tocSidebar');
+    if (sidebar) {
+        sidebar.classList.toggle('active');
+    }
+}
+
+function applyFilters() {
+    console.log('Applying filters...');
+    // Implementation in advanced-features.js
+}
+
+function resetFilters() {
+    console.log('Resetting filters...');
+    // Reset all filter controls
+}
+
+function toggleAnalytics() {
+    const monitor = document.getElementById('performanceMonitor');
+    if (monitor) {
+        monitor.classList.toggle('visible');
+    }
+}
+
+// Show scroll-to-top button when scrolling
+window.addEventListener('scroll', () => {
+    const btn = document.getElementById('scrollTopBtn');
+    if (btn) {
+        btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+    }
+});
+</script>
