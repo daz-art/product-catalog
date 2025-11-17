@@ -1,0 +1,696 @@
+/* ===================================
+   PRODUCT CATALOG TEMPLATE CSS
+   Color Palette & Typography System
+   =================================== */
+
+/* CSS Variables - Color Palette */
+:root {
+    --primary-teal: #00A79D;
+    --secondary-white: #FFFFFF;
+    --text-primary: #2C3E50;
+    --text-secondary: #7F8C8D;
+    --background-neutral: #F5F5F5;
+    --background-beige: #E8E2D8;
+    --accent-divider: #FFFFFF;
+    --placeholder-gray: #E0E0E0;
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--background-beige);
+    color: var(--text-primary);
+    padding: 60px 40px;
+    overflow-x: auto;
+}
+
+/* ===================================
+   CATALOG CONTAINER - 3D ISOMETRIC VIEW
+   =================================== */
+
+.catalog-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    perspective: 2000px;
+    padding: 40px;
+}
+
+/* ===================================
+   SPREAD LAYOUT - DOUBLE PAGE
+   =================================== */
+
+.spread {
+    display: flex;
+    width: 1400px;
+    height: 900px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transform: rotateX(10deg) rotateY(-5deg);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.spread:hover {
+    transform: rotateX(5deg) rotateY(-2deg) scale(1.02);
+}
+
+.page {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.left-page {
+    border-right: 1px solid #e0e0e0;
+}
+
+.page-content {
+    padding: 30px;
+    height: 100%;
+}
+
+/* ===================================
+   TYPOGRAPHY HIERARCHY
+   =================================== */
+
+/* H1 Headlines: 48-56pt, Bold */
+.catalog-title {
+    font-size: 56pt;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--secondary-white);
+    margin-bottom: 20px;
+}
+
+/* H2 Section Headers: 24-28pt, Bold */
+.section-header {
+    font-size: 28pt;
+    font-weight: 700;
+    letter-spacing: 0;
+    margin-bottom: 30px;
+    color: var(--text-primary);
+}
+
+/* H3 Product Titles: 14-16pt, SemiBold */
+.product-title {
+    font-size: 14pt;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+/* Body Text: 9-11pt, Regular */
+p, .three-column-text p {
+    font-size: 11pt;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+/* Caption Text: 7-8pt, Regular */
+.product-sku, .product-desc, .product-price {
+    font-size: 8pt;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+/* Page Header Pattern */
+.page-header {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    font-size: 16pt;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* ===================================
+   SPREAD 1: COVER PAGE
+   =================================== */
+
+.cover-left {
+    background: var(--primary-teal);
+    position: relative;
+}
+
+.teal-gradient-background {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #00A79D 0%, #33BFB6 50%, #00A79D 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.large-placeholder {
+    width: 200px;
+    height: 200px;
+    background: var(--placeholder-gray);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    position: relative;
+}
+
+.placeholder-icon {
+    width: 100px;
+    height: 100px;
+    opacity: 0.5;
+}
+
+.curved-swoosh {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.cover-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.cover-top {
+    flex: 0 0 60%;
+    background: var(--secondary-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.logo {
+    font-size: 48pt;
+    font-weight: 700;
+    color: var(--primary-teal);
+    letter-spacing: 0.05em;
+}
+
+.cover-bottom {
+    flex: 0 0 40%;
+    background: var(--primary-teal);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.curved-transition {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: var(--primary-teal);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+.title-block {
+    z-index: 2;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 11pt;
+    color: var(--secondary-white);
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.year-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 30px;
+    border-radius: 25px;
+    font-size: 14pt;
+    font-weight: 600;
+    color: var(--secondary-white);
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.contact-info {
+    text-align: left;
+    display: inline-block;
+}
+
+.contact-item {
+    font-size: 10pt;
+    color: var(--secondary-white);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-item .icon {
+    font-size: 14pt;
+}
+
+/* ===================================
+   SPREAD 2: TABLE OF CONTENTS
+   =================================== */
+
+.toc-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.toc-button {
+    width: 100%;
+    height: 45px;
+    background: var(--primary-teal);
+    border: none;
+    border-radius: 25px;
+    color: var(--secondary-white);
+    font-size: 14pt;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    transition: all 0.3s ease;
+}
+
+.toc-button:hover {
+    background: #008C84;
+    transform: translateX(5px);
+}
+
+.page-num {
+    font-weight: 700;
+}
+
+/* Three Column Text Layout */
+.three-column-text {
+    column-count: 3;
+    column-gap: 20px;
+    text-align: justify;
+    font-size: 9pt;
+    line-height: 1.4;
+}
+
+/* ===================================
+   PRODUCT GRID LAYOUTS (SPREADS 3-4)
+   =================================== */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 20px;
+    margin-top: 20px;
+}
+
+.product-grid.grid-compact {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px 20px;
+}
+
+.product-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-image-placeholder {
+    width: 120px;
+    height: 120px;
+    background: var(--background-neutral);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.product-info {
+    text-align: center;
+    width: 100%;
+}
+
+.product-sku {
+    font-size: 8pt;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.product-desc {
+    font-size: 7pt;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    line-height: 1.3;
+    max-height: 2.6em;
+    overflow: hidden;
+}
+
+.product-price {
+    font-size: 8pt;
+    font-weight: 600;
+    color: var(--primary-teal);
+}
+
+/* ===================================
+   DETAILED PRODUCT LISTINGS (SPREADS 5-7)
+   =================================== */
+
+.detailed-products {
+    display: grid;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.detailed-products.two-column {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 20px;
+}
+
+.detailed-products.three-column {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px 15px;
+}
+
+.detailed-product {
+    display: flex;
+    flex-direction: column;
+}
+
+.detailed-image-placeholder {
+    width: 100%;
+    height: 150px;
+    background: var(--background-neutral);
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.detailed-product.compact .detailed-image-placeholder {
+    height: 120px;
+}
+
+.product-description {
+    font-size: 8pt;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.product-price-label {
+    font-size: 9pt;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.price-underline {
+    border-bottom: 1px solid var(--text-primary);
+    display: inline-block;
+    min-width: 80px;
+}
+
+/* Product Specifications Table */
+.product-specs {
+    margin-top: 10px;
+}
+
+.spec-row {
+    display: flex;
+    align-items: center;
+    font-size: 8pt;
+    margin-bottom: 5px;
+    color: var(--text-secondary);
+}
+
+.spec-row span:first-child {
+    min-width: 60px;
+}
+
+.spec-row span:last-child {
+    min-width: 60px;
+    text-align: right;
+}
+
+.dotted-leader {
+    flex: 1;
+    border-bottom: 1px dotted var(--text-secondary);
+    margin: 0 8px;
+    height: 1px;
+}
+
+/* ===================================
+   SPREAD 7: CONTACT & BACK COVER
+   =================================== */
+
+.contact-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.contact-block {
+    background: var(--background-neutral);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.contact-block.full-width {
+    grid-column: 1 / -1;
+}
+
+.contact-block h3 {
+    font-size: 14pt;
+    font-weight: 600;
+    color: var(--primary-teal);
+    margin-bottom: 15px;
+}
+
+.contact-block p {
+    font-size: 10pt;
+    line-height: 1.6;
+}
+
+/* Back Cover */
+.back-cover {
+    background: var(--primary-teal);
+    display: flex;
+    flex-direction: column;
+}
+
+.back-cover-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.back-teal-section {
+    flex: 1;
+    background: var(--primary-teal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+}
+
+.back-title {
+    font-size: 48pt;
+    font-weight: 700;
+    color: var(--secondary-white);
+    margin-bottom: 15px;
+}
+
+.back-subtitle {
+    font-size: 18pt;
+    color: var(--secondary-white);
+    opacity: 0.9;
+    margin-bottom: 40px;
+}
+
+.back-logo {
+    font-size: 36pt;
+    font-weight: 700;
+    color: var(--secondary-white);
+    letter-spacing: 0.1em;
+}
+
+.back-white-section {
+    background: var(--secondary-white);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.back-contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.back-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 11pt;
+    color: var(--text-primary);
+}
+
+.back-contact-item .icon {
+    font-size: 18pt;
+}
+
+.back-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.back-footer p {
+    font-size: 9pt;
+    color: var(--text-secondary);
+}
+
+/* ===================================
+   RESPONSIVE ADJUSTMENTS
+   =================================== */
+
+@media (max-width: 1500px) {
+    .spread {
+        width: 1200px;
+        height: 750px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .spread {
+        width: 1000px;
+        height: 625px;
+        transform: rotateX(8deg) rotateY(-4deg);
+    }
+
+    .catalog-title {
+        font-size: 42pt;
+    }
+
+    .section-header {
+        font-size: 24pt;
+    }
+}
+
+@media (max-width: 1100px) {
+    .spread {
+        width: 900px;
+        height: 562px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .detailed-products.three-column {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ===================================
+   PRINT STYLES
+   =================================== */
+
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .catalog-container {
+        perspective: none;
+        padding: 0;
+        gap: 20px;
+    }
+
+    .spread {
+        box-shadow: none;
+        transform: none;
+        page-break-after: always;
+        width: 100%;
+        height: auto;
+        min-height: 297mm;
+    }
+
+    .spread:hover {
+        transform: none;
+    }
+}
+
+/* ===================================
+   UTILITY CLASSES
+   =================================== */
+
+.text-center {
+    text-align: center;
+}
+
+.text-teal {
+    color: var(--primary-teal);
+}
+
+.bg-teal {
+    background-color: var(--primary-teal);
+}
+
+.bg-white {
+    background-color: var(--secondary-white);
+}
+
+.shadow-soft {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ===================================
+   ANIMATIONS
+   =================================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.spread {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.spread:nth-child(1) { animation-delay: 0s; }
+.spread:nth-child(2) { animation-delay: 0.1s; }
+.spread:nth-child(3) { animation-delay: 0.2s; }
+.spread:nth-child(4) { animation-delay: 0.3s; }
+.spread:nth-child(5) { animation-delay: 0.4s; }
+.spread:nth-child(6) { animation-delay: 0.5s; }
+.spread:nth-child(7) { animation-delay: 0.6s; }
