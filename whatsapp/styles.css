@@ -26,6 +26,14 @@
   --cell-press: #d1d1d6;
   --row-meta: #8a8a8e;
   --shadow: 0 1px 8px rgba(0,0,0,.12);
+  /* Liquid Glass */
+  --glass-bg: rgba(255,255,255,.55);
+  --glass-strong: rgba(255,255,255,.72);
+  --glass-blur: blur(26px) saturate(190%);
+  --glass-border: rgba(255,255,255,.6);
+  --glass-hi: rgba(255,255,255,.85);
+  --glass-shadow: 0 6px 26px rgba(0,0,0,.16), 0 1px 3px rgba(0,0,0,.1);
+  --glass-tint: rgba(0,168,132,.16);
 }
 
 #app[data-theme="dark"] {
@@ -48,6 +56,13 @@
   --search-bg: #1c1c1e;
   --cell-press: #2c2c2e;
   --row-meta: #98989f;
+  --glass-bg: rgba(40,40,44,.5);
+  --glass-strong: rgba(44,44,48,.66);
+  --glass-blur: blur(26px) saturate(180%);
+  --glass-border: rgba(255,255,255,.14);
+  --glass-hi: rgba(255,255,255,.22);
+  --glass-shadow: 0 6px 26px rgba(0,0,0,.5), 0 1px 3px rgba(0,0,0,.4);
+  --glass-tint: rgba(37,211,102,.2);
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -79,8 +94,8 @@ button { font-family: inherit; }
 .splash-meta { color: var(--text); font-weight: 600; font-size: 16px; margin: 0; display: inline-flex; align-items: center; gap: 6px; }
 
 /* ===================== TAB VIEW / PAGES ===================== */
-.main { background: var(--grouped-bg); }
-.tabview { flex: 1; position: relative; overflow: hidden; }
+.main { background: var(--grouped-bg); }  /* keeps position:absolute inset:0 from .screen */
+.tabview { position: absolute; inset: 0; overflow: hidden; }
 .ios-page {
   position: absolute; inset: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
   background: var(--grouped-bg);
@@ -100,21 +115,22 @@ button { font-family: inherit; }
   content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: .5px;
   background: var(--separator); opacity: 0; transition: opacity .2s;
 }
-.ios-nav.scrolled { background: var(--nav-bg); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); }
+.ios-nav.scrolled { background: var(--glass-bg); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); }
 .ios-nav.scrolled::after { opacity: 1; }
-.nav-left, .nav-right { display: inline-flex; align-items: center; gap: 2px; min-width: 60px; }
+.nav-left, .nav-right { display: inline-flex; align-items: center; gap: 8px; min-width: 60px; }
 .nav-right { justify-content: flex-end; }
 .nav-compact-title { font-size: 17px; font-weight: 600; color: var(--text); opacity: 0; transform: translateY(3px); transition: opacity .18s, transform .18s; }
 .ios-nav.scrolled .nav-compact-title { opacity: 1; transform: none; }
-.nav-text-btn { background: none; border: none; color: var(--tint); font-size: 17px; cursor: pointer; padding: 6px 4px; }
-.nav-text-btn:active { opacity: .5; }
-.nav-btn { background: none; border: none; cursor: pointer; color: var(--tint); padding: 6px; }
-.nav-btn:active { opacity: .5; }
+/* frosted-glass bar buttons */
+.nav-text-btn { background: var(--glass-bg); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); border: .5px solid var(--glass-border); color: var(--tint); font-size: 16px; cursor: pointer; padding: 6px 14px; border-radius: 18px; box-shadow: inset 0 .5px 0 var(--glass-hi); }
+.nav-text-btn:active { opacity: .55; }
+.nav-btn { background: var(--glass-bg); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); border: .5px solid var(--glass-border); cursor: pointer; color: var(--tint); width: 36px; height: 36px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; padding: 0; box-shadow: inset 0 .5px 0 var(--glass-hi); }
+.nav-btn:active { opacity: .55; }
 
 .ios-largetitle { font-size: 34px; font-weight: 700; letter-spacing: .37px; margin: 0; padding: 2px 16px 6px; color: var(--text); }
 
 /* iOS search field */
-.ios-search { margin: 4px 16px 10px; background: var(--search-bg); border-radius: 10px; height: 36px; display: flex; align-items: center; gap: 6px; padding: 0 8px; color: var(--text-2); }
+.ios-search { margin: 4px 16px 10px; background: var(--glass-bg); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); border: .5px solid var(--glass-border); box-shadow: inset 0 .5px 0 var(--glass-hi); border-radius: 12px; height: 38px; display: flex; align-items: center; gap: 6px; padding: 0 10px; color: var(--text-2); }
 .ios-search .srch-ico { display: inline-flex; }
 .ios-search input { flex: 1; border: none; background: none; outline: none; font-size: 17px; color: var(--text); }
 .ios-search input::placeholder { color: var(--text-2); }
@@ -126,7 +142,7 @@ button { font-family: inherit; }
 .ios-group { background: var(--cell-bg); margin: 0 16px; border-radius: 12px; overflow: hidden; }
 .ios-group.flush { margin: 0; border-radius: 0; background: var(--bg); }
 .ios-page[data-panel="chats"] .ios-group.flush { background: var(--bg); }
-.ios-foot-gap { height: calc(60px + env(safe-area-inset-bottom)); }
+.ios-foot-gap { height: calc(104px + env(safe-area-inset-bottom)); }
 
 /* generic iOS row */
 .ios-row { display: flex; align-items: center; gap: 12px; padding: 9px 14px; cursor: pointer; position: relative; }
@@ -241,31 +257,35 @@ button { font-family: inherit; }
 .set-label { font-size: 17px; color: var(--text); }
 .set-row-right { display: flex; align-items: center; gap: 6px; color: var(--text-2); font-size: 16px; }
 
-/* ===================== iOS TAB BAR ===================== */
+/* ===================== iOS TAB BAR — Liquid Glass (floating) ===================== */
 .tabbar {
-  display: flex; flex-shrink: 0;
-  background: var(--tabbar-bg); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
-  border-top: .5px solid var(--separator);
-  padding-bottom: env(safe-area-inset-bottom);
-  z-index: 7;
+  position: absolute; left: 10px; right: 10px; bottom: calc(8px + env(safe-area-inset-bottom));
+  display: flex; z-index: 7;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+  border: .5px solid var(--glass-border);
+  border-radius: 30px;
+  box-shadow: var(--glass-shadow), inset 0 .5px 0 var(--glass-hi);
+  padding: 8px 4px 8px;
 }
-.tab { flex: 1; background: none; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 7px 0 5px; color: var(--text-2); }
-.tab-ico { position: relative; display: flex; align-items: center; justify-content: center; height: 30px; }
+.tab { flex: 1; background: none; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 2px 0; color: var(--text-2); position: relative; }
+.tab-ico { position: relative; display: flex; align-items: center; justify-content: center; height: 30px; width: 52px; border-radius: 15px; transition: background .2s; }
 .tab .ico-fill { display: none; }
 .tab-active { color: var(--green); }
+.tab-active .tab-ico { background: var(--glass-tint); box-shadow: inset 0 .5px 0 var(--glass-hi); }
 .tab-active .ico-fill { display: block; }
 .tab-active .ico-line { display: none; }
 .tab-label { font-size: 10px; font-weight: 500; }
-.tab-badge { position: absolute; top: -3px; right: -10px; background: var(--green); color: #fff; font-size: 11px; font-weight: 600; min-width: 18px; height: 18px; border-radius: 9px; padding: 0 5px; display: flex; align-items: center; justify-content: center; }
+.tab-badge { position: absolute; top: -3px; right: -10px; background: var(--green); color: #fff; font-size: 11px; font-weight: 600; min-width: 18px; height: 18px; border-radius: 9px; padding: 0 5px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 1.5px var(--glass-strong); }
 
 /* ===================== CHAT DETAIL ===================== */
 .chat-screen { z-index: 20; background: var(--chat-wallpaper); }
 .chat-header {
-  background: var(--nav-bg); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+  background: var(--glass-bg); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
   display: flex; align-items: center; gap: 2px;
   height: calc(50px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top); min-height: 50px;
   padding-left: 4px; padding-right: 10px; flex-shrink: 0; position: relative; z-index: 5;
-  border-bottom: .5px solid var(--separator);
+  border-bottom: .5px solid var(--glass-border); box-shadow: inset 0 .5px 0 var(--glass-hi);
 }
 .chat-back { background: none; border: none; cursor: pointer; color: var(--tint); display: inline-flex; align-items: center; padding: 6px 2px 6px 6px; flex-shrink: 0; }
 .chat-back:active { opacity: .5; }
@@ -282,7 +302,7 @@ button { font-family: inherit; }
   flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
   background-color: var(--chat-wallpaper);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='1.1' stroke-opacity='0.04'%3E%3Cpath d='M20 20h4v4h-4zM40 35l3 3-3 3-3-3zM75 18a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM95 50h5M18 70l4 4M60 60l2-2M100 90a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM30 100h6M55 95l2 2M85 75h3v3h-3z'/%3E%3C/g%3E%3C/svg%3E");
-  display: flex; flex-direction: column; padding: 10px 9px 8px;
+  display: flex; flex-direction: column; padding: 10px 9px 78px;
 }
 #app[data-theme="dark"] .chat-body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23fff' stroke-width='1.1' stroke-opacity='0.03'%3E%3Cpath d='M20 20h4v4h-4zM40 35l3 3-3 3-3-3zM75 18a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM30 100h6M85 75h3v3h-3z'/%3E%3C/g%3E%3C/svg%3E"); }
 
@@ -307,11 +327,17 @@ button { font-family: inherit; }
 .bubble.stack { border-radius: 14px; }
 .bubble.stack::before { display: none; }
 
-/* ===================== iOS COMPOSER ===================== */
-.composer { display: flex; align-items: flex-end; gap: 6px; padding: 6px 8px; padding-bottom: calc(6px + env(safe-area-inset-bottom)); background: var(--nav-bg); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); flex-shrink: 0; border-top: .5px solid var(--separator); }
+/* ===================== iOS COMPOSER — Liquid Glass (floating) ===================== */
+.composer {
+  position: absolute; left: 8px; right: 8px; bottom: calc(8px + env(safe-area-inset-bottom));
+  display: flex; align-items: flex-end; gap: 6px; padding: 6px 8px; z-index: 6;
+  background: var(--glass-bg); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+  border: .5px solid var(--glass-border); border-radius: 27px;
+  box-shadow: var(--glass-shadow), inset 0 .5px 0 var(--glass-hi);
+}
 .comp-plus { width: 34px; height: 34px; border-radius: 50%; background: none; border: none; color: var(--tint); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .comp-plus:active { opacity: .5; }
-.comp-field { flex: 1; background: var(--cell-bg); border: .5px solid var(--separator); border-radius: 18px; display: flex; align-items: center; min-height: 36px; padding: 0 4px 0 12px; }
+.comp-field { flex: 1; background: transparent; border: none; border-radius: 18px; display: flex; align-items: center; min-height: 36px; padding: 0 4px 0 4px; }
 .comp-field input { flex: 1; border: none; background: none; outline: none; font-size: 17px; color: var(--text); padding: 6px 0; }
 .comp-field input::placeholder { color: var(--text-2); }
 .comp-sticker { color: var(--text-2); padding: 4px; }

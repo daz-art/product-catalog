@@ -7,19 +7,25 @@ on an iPhone.
 
 ## iOS design details recreated
 
-- **Bottom tab bar with 5 tabs** — Updates · Calls · Communities · Chats ·
-  **Settings** (the iOS layout; Chats is selected by default), translucent with
-  a blur, green active tint and an unread badge.
+Styled after the iOS 26 **"Liquid Glass"** redesign: a floating translucent tab
+bar and chat composer that let content show faintly through, frosted-glass bar
+buttons, glassy nav bars and search fields, and specular edge highlights.
+
+- **Floating Liquid Glass tab bar with 5 tabs** — Updates · Calls · Communities ·
+  Chats · **Settings** (the iOS layout; Chats is selected by default). It floats
+  as a frosted rounded capsule above the content, with the list visible through
+  it, a green glass pill on the active tab, and an unread badge.
 - **Large collapsing navigation titles** — big bold "Chats"/"Calls"/… titles
   that collapse into a compact centred title as you scroll, iOS-style.
 - **iOS search fields**, **solid pill filter chips** (All / Unread / Favourites /
   Groups) that highlight green when selected — no disclosure chevrons on chat
   rows (matching the real app), green unread timestamps and green unread badges.
 - **Chat detail** — centred avatar + name with online/last-seen status, back
-  chevron with unread count, video & voice call buttons, end-to-end-encryption
-  notice, date chips, rounded iOS message bubbles with tails, blue read
-  receipts, doodle wallpaper, and an iOS composer (green ＋, rounded field with
-  sticker icon, camera, and mic → send).
+  chevron with unread count, video & voice call buttons, a translucent glass
+  top bar, end-to-end-encryption notice, date chips, rounded iOS message bubbles
+  with tails, blue read receipts, doodle wallpaper, and a **floating Liquid
+  Glass composer** (green ＋, field with sticker icon, camera, and mic → send)
+  that floats over the wallpaper.
 - **Settings screen** — iOS grouped lists with coloured icon tiles, profile row
   with QR, and an *Appearance* toggle.
 - **Light & dark appearance** — auto-detects the system setting; toggle in
