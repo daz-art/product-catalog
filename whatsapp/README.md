@@ -1,56 +1,58 @@
-# WhatsApp — Mobile App Mockup (PWA)
+# WhatsApp — iOS App Mockup (PWA)
 
-A 1:1, mobile-only mockup of the **native WhatsApp mobile app** (Android 2024+
-redesign), built as an installable Progressive Web App. This recreates the
-*app itself* — not WhatsApp Web — so the layout, navigation and interactions
-mirror what you'd see on a phone.
+A 1:1, mobile-only mockup of the **native WhatsApp app for iPhone**, built as an
+installable Progressive Web App. This recreates the *iOS app itself* — not
+WhatsApp Web — so the layout, navigation and interactions mirror what you'd see
+on an iPhone.
 
-## What's included
+## iOS design details recreated
 
-- **Splash screen** — WhatsApp logo + "from Meta", matching the native launch screen.
-- **Bottom tab navigation** — Chats · Updates · Communities · Calls, with the
-  pill-style active indicator and unread badge.
-- **Chats** — chat list with generated avatars, filter chips (All / Unread /
-  Favourites / Groups), unread badges, pin & mute markers, sent/delivered/read
-  ticks, and end-to-end-encryption footer.
-- **Chat detail** — header with online/last-seen status, encryption notice,
-  date chips, message bubbles with tails, blue read receipts, the doodle
-  wallpaper, and a working composer. Type a message and it sends, shows the tick
-  progression (sent → delivered → read) and gets an auto-reply.
-- **Updates** — Status rings (with "My status" + add button) and Channels with
-  verified badges and Follow buttons.
-- **Communities** — community card with sub-groups, and "New community".
-- **Calls** — recent calls with incoming/outgoing/missed indicators and voice/
-  video icons.
-- **Dark & light themes** — auto-detects system preference; toggle via the
-  ⋮ menu → *Switch theme*.
+- **Bottom tab bar with 5 tabs** — Updates · Calls · Communities · Chats ·
+  **Settings** (the iOS layout; Chats is selected by default), translucent with
+  a blur, green active tint and an unread badge.
+- **Large collapsing navigation titles** — big bold "Chats"/"Calls"/… titles
+  that collapse into a compact centred title as you scroll, iOS-style.
+- **iOS search fields**, **solid pill filter chips** (All / Unread / Favourites /
+  Groups) that highlight green when selected — no disclosure chevrons on chat
+  rows (matching the real app), green unread timestamps and green unread badges.
+- **Chat detail** — centred avatar + name with online/last-seen status, back
+  chevron with unread count, video & voice call buttons, end-to-end-encryption
+  notice, date chips, rounded iOS message bubbles with tails, blue read
+  receipts, doodle wallpaper, and an iOS composer (green ＋, rounded field with
+  sticker icon, camera, and mic → send).
+- **Settings screen** — iOS grouped lists with coloured icon tiles, profile row
+  with QR, and an *Appearance* toggle.
+- **Light & dark appearance** — auto-detects the system setting; toggle in
+  Settings → *Switch Appearance*.
+
+Typing a message sends it, shows the tick progression (sent → delivered → read)
+and triggers an auto-reply.
 
 ## PWA features
 
-- `manifest.json` with standalone display, portrait orientation, theme colors,
-  app icons (SVG + generated PNG 192/512/maskable/180) and app shortcuts.
-- `sw.js` service worker for offline-first caching — works without a network
-  connection once loaded.
-- Installable to the home screen on Android/iOS; launches full-screen with no
+- `manifest.json` — standalone display, portrait orientation, app icons
+  (SVG + generated PNG 192/512/maskable/180), and app shortcuts.
+- `sw.js` — offline-first service worker; works without a network once loaded.
+- Installable to the Home Screen on iOS/Android; launches full-screen with no
   browser chrome, like the real app.
 
 ## Run it
 
-It's a static site — serve the folder over HTTP (a service worker requires
-`http(s)`, not `file://`):
+Static site — serve the folder over HTTP (a service worker needs `http(s)`, not
+`file://`):
 
 ```bash
 cd whatsapp
 python3 -m http.server 8099
-# open http://localhost:8099 on a phone, or in a desktop browser's
-# mobile device emulation. On desktop (≥500px) it renders inside a phone frame.
+# open http://localhost:8099 on a phone, or in a desktop browser's mobile
+# device emulation. On desktop (≥500px) it renders inside an iPhone frame.
 ```
 
-To install: open in Chrome/Safari on mobile → *Add to Home Screen*.
+To install: open in Safari/Chrome on iPhone → Share → *Add to Home Screen*.
 
 ## Deep links (also power the manifest shortcuts)
 
-- `?tab=calls` — open a specific tab (`chats`, `updates`, `communities`, `calls`)
+- `?tab=calls` — open a tab (`updates`, `calls`, `communities`, `chats`, `settings`)
 - `?screen=chat&id=amir` — open a specific chat
 - `?action=new-chat` — new-chat shortcut
 - `?fast` — skip the splash delay (handy for previews)

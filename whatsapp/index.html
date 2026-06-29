@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <meta name="theme-color" content="#008069" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#1f2c34" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f6f6f6" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1c1c1e" media="(prefers-color-scheme: dark)" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="WhatsApp" />
-  <meta name="description" content="WhatsApp mobile app mockup — a 1:1 PWA recreation of the native mobile experience." />
+  <meta name="description" content="WhatsApp iOS app mockup — a 1:1 PWA recreation of the native iPhone experience." />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/svg+xml" href="icons/icon.svg" />
   <link rel="apple-touch-icon" href="icons/icon-180.png" />
@@ -17,15 +17,13 @@
   <title>WhatsApp</title>
 </head>
 <body>
-  <!-- The device frame is only shown on large (desktop) screens to preview the mobile app.
-       On an actual phone / installed PWA the app fills the viewport. -->
   <div id="device">
     <div id="app" data-screen="splash">
 
       <!-- ============ SPLASH ============ -->
       <section class="screen splash" id="screen-splash">
         <div class="splash-logo" aria-hidden="true">
-          <svg viewBox="0 0 90 90" width="96" height="96"><path fill="currentColor" d="M45 0C20.1 0 0 20.1 0 45c0 7.9 2.1 15.6 6 22.4L0 90l23.2-6.1A44.7 44.7 0 0 0 45 90c24.9 0 45-20.1 45-45S69.9 0 45 0zm26.3 63.6c-1.1 3.1-6.5 6-9 6.4-2.3.3-5.2.5-8.4-.5-1.9-.6-4.4-1.4-7.6-2.8C32.9 60.6 24.3 48 23.7 47.2c-.6-.8-5.4-7.2-5.4-13.7s3.4-9.7 4.6-11c1.2-1.3 2.6-1.6 3.5-1.6.9 0 1.7 0 2.5.1.8 0 1.9-.3 2.9 2.2 1.1 2.6 3.6 8.9 3.9 9.6.3.6.5 1.4.1 2.2-.4.8-.6 1.3-1.2 2-.6.7-1.3 1.6-1.8 2.1-.6.6-1.2 1.2-.5 2.4.7 1.2 3.1 5.1 6.6 8.2 4.6 4.1 8.4 5.3 9.6 5.9 1.2.6 1.9.5 2.6-.3.7-.8 3-3.5 3.8-4.7.8-1.2 1.6-1 2.7-.6 1.1.4 7.2 3.4 8.4 4 1.2.6 2 .9 2.3 1.4.3.6.3 2.8-.8 5.9z"/></svg>
+          <svg viewBox="0 0 90 90" width="100" height="100"><path fill="currentColor" d="M45 0C20.1 0 0 20.1 0 45c0 7.9 2.1 15.6 6 22.4L0 90l23.2-6.1A44.7 44.7 0 0 0 45 90c24.9 0 45-20.1 45-45S69.9 0 45 0zm26.3 63.6c-1.1 3.1-6.5 6-9 6.4-2.3.3-5.2.5-8.4-.5-1.9-.6-4.4-1.4-7.6-2.8C32.9 60.6 24.3 48 23.7 47.2c-.6-.8-5.4-7.2-5.4-13.7s3.4-9.7 4.6-11c1.2-1.3 2.6-1.6 3.5-1.6.9 0 1.7 0 2.5.1.8 0 1.9-.3 2.9 2.2 1.1 2.6 3.6 8.9 3.9 9.6.3.6.5 1.4.1 2.2-.4.8-.6 1.3-1.2 2-.6.7-1.3 1.6-1.8 2.1-.6.6-1.2 1.2-.5 2.4.7 1.2 3.1 5.1 6.6 8.2 4.6 4.1 8.4 5.3 9.6 5.9 1.2.6 1.9.5 2.6-.3.7-.8 3-3.5 3.8-4.7.8-1.2 1.6-1 2.7-.6 1.1.4 7.2 3.4 8.4 4 1.2.6 2 .9 2.3 1.4.3.6.3 2.8-.8 5.9z"/></svg>
         </div>
         <div class="splash-bottom">
           <p class="splash-from">from</p>
@@ -33,37 +31,95 @@
         </div>
       </section>
 
-      <!-- ============ MAIN (tabbed) ============ -->
+      <!-- ============ MAIN (iOS tab view) ============ -->
       <main class="screen main" id="screen-main" hidden>
-        <!-- Top app bar -->
-        <header class="appbar" id="appbar">
-          <h1 class="appbar-title">WhatsApp</h1>
-          <div class="appbar-actions">
-            <button class="icon-btn" aria-label="Camera">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 9a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm0 5.5A2 2 0 1 1 12 10a2 2 0 0 1 0 4.5zM20 6h-3.2l-1.2-1.6c-.4-.5-1-.9-1.7-.9H10c-.7 0-1.3.4-1.7.9L7.2 6H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 13H4V8h4.1l1.8-2.4h4.2L15.9 8H20v11z"/></svg>
-            </button>
-            <button class="icon-btn" aria-label="Search" id="btn-search">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M15.5 14h-.8l-.3-.3a6.5 6.5 0 1 0-.7.7l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
-            </button>
-            <button class="icon-btn" aria-label="More options" id="btn-menu">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
-            </button>
-          </div>
-        </header>
+        <div class="tabview" id="tabview">
 
-        <!-- Search bar (revealed) -->
-        <div class="searchbar" id="searchbar" hidden>
-          <button class="icon-btn" id="btn-search-back" aria-label="Back">
-            <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20z"/></svg>
-          </button>
-          <input type="text" id="search-input" placeholder="Ask Meta AI or Search" autocomplete="off" />
-        </div>
+          <!-- ============ UPDATES ============ -->
+          <section class="ios-page" data-panel="updates" hidden>
+            <div class="ios-nav">
+              <span class="nav-left"></span>
+              <span class="nav-compact-title">Updates</span>
+              <span class="nav-right">
+                <button class="nav-btn icon-btn" aria-label="Camera">@cam</button>
+                <button class="nav-btn icon-btn" aria-label="New status">@compose</button>
+              </span>
+            </div>
+            <h1 class="ios-largetitle">Updates</h1>
+            <div class="ios-search"><span class="srch-ico">@search</span><input placeholder="Search" /></div>
 
-        <!-- Tab panels -->
-        <div class="panels" id="panels">
+            <h2 class="ios-section-head">Status</h2>
+            <div class="ios-group">
+              <ul class="status-list" id="status-list"></ul>
+            </div>
+            <div class="ios-section-head-row">
+              <h2 class="ios-section-head">Channels</h2>
+              <button class="ios-link-btn">See all <span class="chev-r">@chev</span></button>
+            </div>
+            <div class="ios-group">
+              <ul class="channel-list" id="channel-list"></ul>
+            </div>
+            <div class="ios-foot-gap"></div>
+          </section>
 
-          <!-- CHATS -->
-          <section class="panel" data-panel="chats">
+          <!-- ============ CALLS ============ -->
+          <section class="ios-page" data-panel="calls" hidden>
+            <div class="ios-nav">
+              <button class="nav-text-btn nav-left">Edit</button>
+              <span class="nav-compact-title">Calls</span>
+              <span class="nav-right">
+                <button class="nav-btn icon-btn" aria-label="New call">@newcall</button>
+              </span>
+            </div>
+            <h1 class="ios-largetitle">Calls</h1>
+            <div class="ios-search"><span class="srch-ico">@search</span><input placeholder="Search" /></div>
+
+            <div class="ios-group">
+              <div class="ios-row fav-row">
+                <div class="fav-icon">@star</div>
+                <div class="ios-row-main"><span class="ios-row-title link">Add Favourite</span></div>
+              </div>
+            </div>
+            <h2 class="ios-section-head">Recent</h2>
+            <div class="ios-group">
+              <ul class="call-list" id="call-list"></ul>
+            </div>
+            <div class="ios-foot-gap"></div>
+          </section>
+
+          <!-- ============ COMMUNITIES ============ -->
+          <section class="ios-page" data-panel="communities" hidden>
+            <div class="ios-nav">
+              <span class="nav-left"></span>
+              <span class="nav-compact-title">Communities</span>
+              <span class="nav-right"></span>
+            </div>
+            <h1 class="ios-largetitle">Communities</h1>
+
+            <div class="ios-group">
+              <div class="ios-row community-new">
+                <div class="community-new-icon">@people<span class="badge-plus">+</span></div>
+                <div class="ios-row-main"><span class="ios-row-title">New Community</span></div>
+                <span class="chev">@chev</span>
+              </div>
+            </div>
+            <ul class="community-list" id="community-list"></ul>
+            <div class="ios-foot-gap"></div>
+          </section>
+
+          <!-- ============ CHATS ============ -->
+          <section class="ios-page" data-panel="chats">
+            <div class="ios-nav">
+              <button class="nav-text-btn nav-left">Edit</button>
+              <span class="nav-compact-title">Chats</span>
+              <span class="nav-right">
+                <button class="nav-btn icon-btn" aria-label="Camera">@cam</button>
+                <button class="nav-btn icon-btn" aria-label="New chat" id="btn-compose">@compose</button>
+              </span>
+            </div>
+            <h1 class="ios-largetitle">Chats</h1>
+            <div class="ios-search"><span class="srch-ico">@search</span><input id="search-input" placeholder="Ask Meta AI or Search" /></div>
+
             <div class="chip-row" id="chip-row">
               <button class="chip chip-active">All</button>
               <button class="chip">Unread</button>
@@ -71,82 +127,48 @@
               <button class="chip">Groups</button>
               <button class="chip chip-add" aria-label="Add filter">+</button>
             </div>
-            <ul class="chat-list" id="chat-list"></ul>
-            <p class="list-footer"><svg viewBox="0 0 24 24" width="13" height="13"><path fill="currentColor" d="M12 1a4 4 0 0 0-4 4v3H6.5A1.5 1.5 0 0 0 5 9.5v9A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 17.5 8H16V5a4 4 0 0 0-4-4zm0 2a2 2 0 0 1 2 2v3h-4V5a2 2 0 0 1 2-2z"/></svg> Your personal messages are <b>end-to-end encrypted</b></p>
+            <div class="ios-group flush">
+              <ul class="chat-list" id="chat-list"></ul>
+            </div>
+            <p class="archived-note">@lock Your personal messages are <b>end-to-end encrypted</b></p>
+            <div class="ios-foot-gap"></div>
           </section>
 
-          <!-- UPDATES -->
-          <section class="panel" data-panel="updates" hidden>
-            <h2 class="section-head">Status</h2>
-            <ul class="status-list" id="status-list"></ul>
-            <div class="divider"></div>
-            <div class="section-head-row">
-              <h2 class="section-head">Channels</h2>
-              <button class="pill-btn">Explore</button>
+          <!-- ============ SETTINGS ============ -->
+          <section class="ios-page settings-page" data-panel="settings" hidden>
+            <div class="ios-nav">
+              <span class="nav-left"></span>
+              <span class="nav-compact-title">Settings</span>
+              <span class="nav-right"></span>
             </div>
-            <ul class="channel-list" id="channel-list"></ul>
-          </section>
-
-          <!-- COMMUNITIES -->
-          <section class="panel" data-panel="communities" hidden>
-            <div class="community-new">
-              <div class="community-new-icon">
-                <svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-3 0-9 1.5-9 4.5V21h18v-2.5c0-3-6-4.5-9-4.5z"/></svg>
-                <span class="community-plus">+</span>
-              </div>
-              <span>New community</span>
-            </div>
-            <ul class="community-list" id="community-list"></ul>
-          </section>
-
-          <!-- CALLS -->
-          <section class="panel" data-panel="calls" hidden>
-            <div class="fav-link">
-              <div class="fav-icon">
-                <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6z"/></svg>
-              </div>
-              <span>Add favourite</span>
-            </div>
-            <h2 class="section-head">Recent</h2>
-            <ul class="call-list" id="call-list"></ul>
+            <h1 class="ios-largetitle">Settings</h1>
+            <div class="ios-search"><span class="srch-ico">@search</span><input placeholder="Search" /></div>
+            <div id="settings-body"></div>
+            <div class="ios-foot-gap"></div>
           </section>
         </div>
 
-        <!-- Floating action button -->
-        <button class="fab" id="fab" aria-label="New chat">
-          <svg viewBox="0 0 24 24" width="26" height="26" id="fab-icon"><path fill="currentColor" d="M19.005 3.175H4.674C3.642 3.175 3 3.789 3 4.821V21.02l3.544-3.514h12.461c1.033 0 2.064-1.06 2.064-2.093V4.821c-.001-1.032-1.032-1.646-2.064-1.646zm-4.989 9.869H7.041V11.1h6.975v1.944zm3-4H7.041V7.1h9.975v1.944z"/></svg>
-        </button>
-
-        <!-- Bottom navigation -->
-        <nav class="bottom-nav" id="bottom-nav">
-          <button class="nav-item nav-active" data-tab="chats">
-            <span class="nav-ico">
-              <svg class="ico-fill" viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.3-1.4A10 10 0 1 0 12 2z"/></svg>
-              <svg class="ico-line" viewBox="0 0 24 24" width="26" height="26"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3z"/></svg>
-            </span>
-            <span class="nav-badge" id="nav-badge-chats">6</span>
-            <span class="nav-label">Chats</span>
+        <!-- iOS bottom tab bar -->
+        <nav class="tabbar" id="tabbar">
+          <button class="tab" data-tab="updates">
+            <span class="tab-ico">@t-updates</span>
+            <span class="tab-label">Updates</span>
           </button>
-          <button class="nav-item" data-tab="updates">
-            <span class="nav-ico">
-              <svg class="ico-fill" viewBox="0 0 24 24" width="26" height="26"><circle cx="12" cy="12" r="4" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 5.5A9 9 0 0 0 5 18.5M19 5.5a9 9 0 0 1 0 13M8.2 8.5a5 5 0 0 0 0 7M15.8 8.5a5 5 0 0 1 0 7"/></svg>
-              <svg class="ico-line" viewBox="0 0 24 24" width="26" height="26"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M5 5.5A9 9 0 0 0 5 18.5M19 5.5a9 9 0 0 1 0 13M8.2 8.5a5 5 0 0 0 0 7M15.8 8.5a5 5 0 0 1 0 7"/></svg>
-            </span>
-            <span class="nav-label">Updates</span>
+          <button class="tab" data-tab="calls">
+            <span class="tab-ico">@t-calls</span>
+            <span class="tab-label">Calls</span>
           </button>
-          <button class="nav-item" data-tab="communities">
-            <span class="nav-ico">
-              <svg class="ico-fill" viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M16.5 8a3 3 0 1 0-3-3 3 3 0 0 0 3 3zm-9 0a3 3 0 1 0-3-3 3 3 0 0 0 3 3zM7 10c-2 0-5 1-5 3v2h5v-1c0-1.2.5-2.3 1.4-3.2A6.6 6.6 0 0 0 7 10zm10 0c-.5 0-1 0-1.4.1A4.7 4.7 0 0 1 17 13v8h5v-8c0-2-3-3-5-3zm-5 .5c-2.3 0-7 1.2-7 3.5V21h14v-7c0-2.3-4.7-3.5-7-3.5z"/></svg>
-              <svg class="ico-line" viewBox="0 0 24 24" width="26" height="26"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M16.5 7.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm-9 0a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM12 11c-2.3 0-7 1.2-7 3.5V20h14v-5.5c0-2.3-4.7-3.5-7-3.5z"/></svg>
-            </span>
-            <span class="nav-label">Communities</span>
+          <button class="tab" data-tab="communities">
+            <span class="tab-ico">@t-comm</span>
+            <span class="tab-label">Communities</span>
           </button>
-          <button class="nav-item" data-tab="calls">
-            <span class="nav-ico">
-              <svg class="ico-fill" viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M20 15.5c-1.2 0-2.4-.2-3.5-.6a1 1 0 0 0-1 .2l-2.2 2.2a15 15 0 0 1-6.6-6.6l2.2-2.2a1 1 0 0 0 .2-1A11 11 0 0 1 8.5 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1 17 17 0 0 0 17 17 1 1 0 0 0 1-1v-3.5a1 1 0 0 0-1-1z"/></svg>
-              <svg class="ico-line" viewBox="0 0 24 24" width="26" height="26"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M20 15.5c-1.2 0-2.4-.2-3.5-.6a1 1 0 0 0-1 .2l-2.2 2.2a15 15 0 0 1-6.6-6.6l2.2-2.2a1 1 0 0 0 .2-1A11 11 0 0 1 8.5 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1 17 17 0 0 0 17 17 1 1 0 0 0 1-1v-3.5a1 1 0 0 0-1-1z"/></svg>
-            </span>
-            <span class="nav-label">Calls</span>
+          <button class="tab tab-active" data-tab="chats">
+            <span class="tab-ico">@t-chats<span class="tab-badge" id="tab-badge-chats">6</span></span>
+            <span class="tab-label">Chats</span>
+          </button>
+          <button class="tab" data-tab="settings">
+            <span class="tab-ico">@t-settings</span>
+            <span class="tab-label">Settings</span>
           </button>
         </nav>
       </main>
@@ -154,63 +176,43 @@
       <!-- ============ CHAT DETAIL ============ -->
       <section class="screen chat-screen" id="screen-chat" hidden>
         <header class="chat-header" id="chat-header">
-          <button class="icon-btn" id="chat-back" aria-label="Back">
-            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20z"/></svg>
+          <button class="chat-back" id="chat-back" aria-label="Back">
+            <span class="back-chev">@chev-l</span><span class="back-count" id="back-count"></span>
           </button>
-          <div class="chat-header-avatar" id="chat-header-avatar"></div>
-          <div class="chat-header-info" id="chat-header-info">
-            <span class="chat-header-name" id="chat-header-name"></span>
-            <span class="chat-header-sub" id="chat-header-sub"></span>
+          <div class="chat-id" id="chat-header-info">
+            <div class="chat-header-avatar" id="chat-header-avatar"></div>
+            <div class="chat-id-text">
+              <span class="chat-header-name" id="chat-header-name"></span>
+              <span class="chat-header-sub" id="chat-header-sub"></span>
+            </div>
           </div>
           <div class="chat-header-actions">
-            <button class="icon-btn" aria-label="Video call">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M17 10.5V7c0-.6-.4-1-1-1H4c-.6 0-1 .4-1 1v10c0 .6.4 1 1 1h12c.6 0 1-.4 1-1v-3.5l4 4v-11l-4 4z"/></svg>
-            </button>
-            <button class="icon-btn" aria-label="Voice call">
-              <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 15.5c-1.2 0-2.4-.2-3.5-.6a1 1 0 0 0-1 .2l-2.2 2.2a15 15 0 0 1-6.6-6.6l2.2-2.2a1 1 0 0 0 .2-1A11 11 0 0 1 8.5 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1 17 17 0 0 0 17 17 1 1 0 0 0 1-1v-3.5a1 1 0 0 0-1-1z"/></svg>
-            </button>
-            <button class="icon-btn" aria-label="More options">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
-            </button>
+            <button class="icon-btn" aria-label="Video call">@video</button>
+            <button class="icon-btn" aria-label="Voice call">@voice</button>
           </div>
         </header>
 
         <div class="chat-body" id="chat-body">
-          <div class="enc-notice">
-            <svg viewBox="0 0 24 24" width="11" height="11"><path fill="currentColor" d="M12 1a4 4 0 0 0-4 4v3H6.5A1.5 1.5 0 0 0 5 9.5v9A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 17.5 8H16V5a4 4 0 0 0-4-4zm0 2a2 2 0 0 1 2 2v3h-4V5a2 2 0 0 1 2-2z"/></svg>
-            Messages and calls are end-to-end encrypted. No one outside of this chat, not even WhatsApp, can read or listen to them. Tap to learn more.
-          </div>
+          <div class="enc-notice">@lock Messages and calls are end-to-end encrypted. No one outside of this chat, not even WhatsApp, can read or listen to them. Tap to learn more.</div>
           <div class="messages" id="messages"></div>
         </div>
 
         <div class="composer" id="composer">
-          <div class="composer-input">
-            <button class="icon-btn ci-emoji" aria-label="Emoji">
-              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zM8.5 11a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm7 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM12 17.5c2.3 0 4.3-1.4 5-3.5H7c.7 2.1 2.7 3.5 5 3.5z"/></svg>
-            </button>
+          <button class="comp-plus" id="comp-plus" aria-label="Attach">@plus</button>
+          <div class="comp-field">
             <input type="text" id="msg-input" placeholder="Message" autocomplete="off" />
-            <button class="icon-btn ci-attach" aria-label="Attach">
-              <svg viewBox="0 0 24 24" width="23" height="23"><path fill="currentColor" d="M16.5 6v11.5a4 4 0 0 1-8 0V5a2.5 2.5 0 0 1 5 0v10.5a1 1 0 0 1-2 0V6H10v9.5a2.5 2.5 0 0 0 5 0V5a4 4 0 0 0-8 0v12.5a5.5 5.5 0 0 0 11 0V6h-1.5z"/></svg>
-            </button>
-            <button class="icon-btn ci-camera" aria-label="Camera">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 9a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm0 5.5A2 2 0 1 1 12 10a2 2 0 0 1 0 4.5zM20 6h-3.2l-1.2-1.6c-.4-.5-1-.9-1.7-.9H10c-.7 0-1.3.4-1.7.9L7.2 6H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/></svg>
-            </button>
+            <button class="icon-btn comp-sticker" aria-label="Stickers">@sticker</button>
           </div>
-          <button class="send-btn" id="send-btn" aria-label="Send voice message">
-            <svg id="send-icon-mic" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-3.1A7 7 0 0 0 19 11h-2z"/></svg>
-            <svg id="send-icon-arrow" viewBox="0 0 24 24" width="24" height="24" hidden><path fill="currentColor" d="M3 20l18-8L3 4v6l13 2-13 2z"/></svg>
+          <button class="icon-btn comp-camera" id="comp-camera" aria-label="Camera">@cam</button>
+          <button class="comp-send" id="send-btn" aria-label="Voice message">
+            <span id="send-mic">@mic</span>
+            <span id="send-arrow" hidden>@send-up</span>
           </button>
         </div>
       </section>
 
-      <!-- Toast / menu sheet -->
+      <!-- Sheet / toast -->
       <div class="sheet-overlay" id="sheet-overlay" hidden></div>
-      <div class="menu-sheet" id="menu-sheet" hidden>
-        <button class="menu-row" data-action="dark">Switch theme</button>
-        <button class="menu-row" data-action="new-group">New group</button>
-        <button class="menu-row" data-action="settings">Settings</button>
-        <button class="menu-row" data-action="about">About this mockup</button>
-      </div>
       <div class="toast" id="toast" hidden></div>
     </div>
   </div>
