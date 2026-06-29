@@ -281,6 +281,7 @@
     updateBadge(); updateSendIcon(); bind();
 
     const params=new URLSearchParams(location.search);
+    const wantTheme=params.get("theme"); if(wantTheme==="dark"||wantTheme==="light")app.dataset.theme=wantTheme;
     const wantTab=params.get("tab"); const wantScreen=params.get("screen"); const wantId=params.get("id");
     const splashDelay=params.get("fast")!==null?0:1400;
     const go=()=>{ showScreen("main"); if(wantTab&&["updates","calls","communities","chats","settings"].includes(wantTab))switchTab(wantTab); if(params.get("action")==="new-chat")toast("New chat"); if(wantScreen==="chat"&&wantId)openChat(wantId); };
