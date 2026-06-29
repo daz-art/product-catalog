@@ -236,6 +236,7 @@
   function switchTab(tab){
     document.querySelectorAll(".tab").forEach((b)=>b.classList.toggle("tab-active",b.dataset.tab===tab));
     document.querySelectorAll(".ios-page").forEach((p)=>{p.hidden=p.dataset.panel!==tab; if(p.dataset.panel===tab)p.scrollTop=0;});
+    $("tabbar").classList.remove("condensed");
   }
 
   /* ===================== UTIL ===================== */
@@ -249,9 +250,18 @@
 
   /* collapse large title on scroll */
   function bindScrollCollapse(){
+    const tb=$("tabbar");
     document.querySelectorAll(".ios-page").forEach((page)=>{
-      const nav=page.querySelector(".ios-nav"); if(!nav)return;
-      page.addEventListener("scroll",()=>{nav.classList.toggle("scrolled",page.scrollTop>26);},{passive:true});
+      const nav=page.querySelector(".ios-nav"); let lastY=0;
+      page.addEventListener("scroll",()=>{
+        const y=page.scrollTop;
+        if(nav)nav.classList.toggle("scrolled",y>26);
+        // iOS 26 behaviour: tab bar condenses on scroll-down, expands on scroll-up / at top
+        if(y<=8) tb.classList.remove("condensed");
+        else if(y>lastY+4 && y>56) tb.classList.add("condensed");
+        else if(y<lastY-4) tb.classList.remove("condensed");
+        lastY=y;
+      },{passive:true});
     });
   }
 
@@ -275,7 +285,7 @@
 
   /* ===================== INIT ===================== */
   function init(){
-    try{const s=localStorage.getItem("wa-theme"); if(s)app.dataset.theme=s; else if(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)app.dataset.theme="dark"; else app.dataset.theme="light";}catch(e){app.dataset.theme="light";}
+    try{const s=localStorage.getItem("wa-theme"); app.dataset.theme=s||"dark";}catch(e){app.dataset.theme="dark";}
     injectIcons();
     renderChats(); renderStatuses(); renderChannels(); renderCommunities(); renderCalls(); renderSettings();
     updateBadge(); updateSendIcon(); bind();
@@ -284,7 +294,8 @@
     const wantTheme=params.get("theme"); if(wantTheme==="dark"||wantTheme==="light")app.dataset.theme=wantTheme;
     const wantTab=params.get("tab"); const wantScreen=params.get("screen"); const wantId=params.get("id");
     const splashDelay=params.get("fast")!==null?0:1400;
-    const go=()=>{ showScreen("main"); if(wantTab&&["updates","calls","communities","chats","settings"].includes(wantTab))switchTab(wantTab); if(params.get("action")==="new-chat")toast("New chat"); if(wantScreen==="chat"&&wantId)openChat(wantId); };
+    const go=()=>{ showScreen("main"); if(wantTab&&["updates","calls","communities","chats","settings"].includes(wantTab))switchTab(wantTab); if(params.get("action")==="new-chat")toast("New chat"); if(wantScreen==="chat"&&wantId)openChat(wantId);
+      const sc=params.get("scroll"); if(sc){const pg=document.querySelector(".ios-page:not([hidden])"); if(pg){pg.scrollTop=parseInt(sc,10)||0; pg.dispatchEvent(new Event("scroll"));}} };
     setTimeout(go,splashDelay);
 
     if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
